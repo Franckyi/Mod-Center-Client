@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.franckyi.mpb.controller.ModBrowserController">
+   <children>
+      <HBox prefHeight="50.0" prefWidth="900.0" spacing="10.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="450.0" spacing="10.0">
+               <children>
+                  <Label text="Minecraft Version :">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="mcVersion" focusColor="#40a84b" onAction="#mcVersionChanged" prefWidth="100.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="450.0" spacing="10.0">
+               <children>
+                  <Label text="Sort by :">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="sortFilter" focusColor="#a84040" onAction="#sortFilterChanged" prefWidth="150.0" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <ScrollPane fx:id="modBrowserScrollPane" pannable="true" prefHeight="700.0" prefWidth="900.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="900.0" spacing="20.0">
+         <children>
+            <JFXButton fx:id="first" onAction="#firstPage" style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;" text="&lt;&lt;">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="previous" onAction="#previousPage" prefWidth="125.0" style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;" text="&lt; Previous">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="pageNumber" text="Page n°X">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="next" onAction="#nextPage" prefWidth="125.0" style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;" text="Next &gt;">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="last" onAction="#lastPage" style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;" text="&gt;&gt;">
+               <font>
+                  <Font name="Segoe UI" size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</VBox>

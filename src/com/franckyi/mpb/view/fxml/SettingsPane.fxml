@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" spacing="25.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.franckyi.mpb.controller.SettingsController">
+   <padding>
+      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+   </padding>
+   <children>
+      <Label text="Settings">
+         <font>
+            <Font name="Segoe UI Bold" size="36.0" />
+         </font>
+      </Label>
+      <Separator prefWidth="200.0" />
+      <VBox prefWidth="100.0" spacing="10.0">
+         <children>
+            <Label text="Mod Browser :">
+               <font>
+                  <Font name="Segoe UI Bold" size="24.0" />
+               </font>
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+            <VBox prefWidth="425.0">
+               <children>
+                  <JFXToggleButton fx:id="displayModsThumbnail" selected="true" text="Display mods thumbnail (disable this if loading is too slow)">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                     </font>
+                  </JFXToggleButton>
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </VBox>
+      <Separator prefWidth="200.0" />
+      <HBox fx:id="buttonsPane" alignment="CENTER" prefHeight="50.0" spacing="50.0" />
+   </children>
+</VBox>

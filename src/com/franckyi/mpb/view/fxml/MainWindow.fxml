@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.franckyi.mpb.controller.MainWindowController">
+   <children>
+      <Pane layoutX="250.0" prefHeight="200.0" prefWidth="900.0">
+         <children>
+            <Label layoutX="256.0" layoutY="71.0" prefHeight="58.0" prefWidth="388.0" text="Modpack Builder" textAlignment="CENTER">
+               <font>
+                  <Font name="Segoe UI Bold" size="48.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <VBox fx:id="menu" prefHeight="1000.0" prefWidth="250.0">
+         <children>
+            <ImageView fx:id="logo" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </VBox.margin>
+            </ImageView>
+            <VBox alignment="TOP_RIGHT" prefHeight="400.0" prefWidth="250.0">
+               <children>
+                  <Separator prefHeight="1.0" prefWidth="200.0" />
+                  <Label fx:id="myMods" alignment="CENTER_RIGHT" onMouseEntered="#showMyMods" prefHeight="40.0" prefWidth="250.0" text="My Mods &gt;">
+                     <font>
+                        <Font name="Segoe UI Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="myModpacks" alignment="CENTER_RIGHT" onMouseEntered="#showMyModpacks" prefHeight="40.0" prefWidth="250.0" text="My Modpacks &gt;">
+                     <font>
+                        <Font name="Segoe UI Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="modBrowser" alignment="CENTER_RIGHT" onMouseEntered="#showModBrowser" prefHeight="40.0" prefWidth="250.0" text="Mod Browser &gt;">
+                     <font>
+                        <Font name="Segoe UI Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <Separator prefHeight="1.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_RIGHT" prefHeight="300.0" prefWidth="250.0">
+               <children>
+                  <Separator prefHeight="1.0" prefWidth="200.0" />
+                  <Label fx:id="settings" alignment="CENTER_RIGHT" onMouseEntered="#showSettings" prefHeight="40.0" prefWidth="250.0" text="Settings &gt;">
+                     <font>
+                        <Font name="Segoe UI Bold" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets right="5.0" />
+                     </padding>
+                  </Label>
+                  <Separator prefHeight="1.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <Pane fx:id="body" layoutX="250.0" layoutY="200.0" prefHeight="800.0" prefWidth="900.0" />
+   </children>
+</AnchorPane>
