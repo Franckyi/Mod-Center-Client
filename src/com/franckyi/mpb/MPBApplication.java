@@ -22,6 +22,7 @@ public class MPBApplication extends Application {
 	public static final String AUTHOR = "Franckyi";
 
 	public static MPBApplication INSTANCE;
+	public MPBConfig config;
 	public Stage mainStage, secondaryStage = new Stage();
 	public ModBrowserCache cache = new ModBrowserCache();
 	public Map<FXMLFile, Parent> parents = new HashMap<>();

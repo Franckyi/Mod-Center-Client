@@ -1,6 +1,5 @@
 package com.franckyi.mpb.view.region;
 
-import com.franckyi.mpb.MPBConfig;
 import com.franckyi.mpb.MPBUtils;
 import com.franckyi.mpb.core.curse.MCVersion;
 import com.franckyi.mpb.core.curse.ModLogical;
@@ -34,10 +33,7 @@ public class ModVisual extends Pane {
 		this.setWidth(950);
 		this.setHeight(150);
 		this.modLogical = mod;
-		if(MPBConfig.displayModsThumbnail.getValue())
-			this.image = new ImageView(mod.getImage());
-		else
-			this.image = new ImageView();
+		this.image = new ImageView(/*mod.getImage()*/);
 		this.name = new Label(MPBUtils.unescapeHTML(mod.getName()));
 		this.monthlyDl = new Label(mod.getMonthlyDl());
 		this.totalDl = new Label(mod.getTotalDl());
