@@ -3,6 +3,7 @@ package com.franckyi.mpb.view.nodes;
 import com.franckyi.mpb.core.curse.MCVersion;
 import com.franckyi.mpb.core.curse.ModLogical;
 import com.franckyi.mpb.core.tasks.SelectModTask;
+import com.franckyi.mpb.view.MPBFonts;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.geometry.Insets;
@@ -11,19 +12,15 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class DownloadButton extends HBox {
-
-	private static final Font BIG = Font.font("Segoe UI", FontWeight.BOLD, 24);
 
 	private JFXButton download;
 	private JFXButton options;
 
 	public DownloadButton(ModLogical mod, MCVersion version) {
 		download = new JFXButton("Download");
-		download.setFont(BIG);
+		download.setFont(MPBFonts.BIG_20);
 		download.setTextFill(Color.WHITE);
 		download.setStyle("-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10 0 0 10;");
 		download.setBackground(new Background(
@@ -36,7 +33,7 @@ public class DownloadButton extends HBox {
 		});
 
 		options = new JFXButton("...");
-		options.setFont(BIG);
+		options.setFont(MPBFonts.BIG_20);
 		options.setTextFill(Color.WHITE);
 		options.setStyle("-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 0 10 10 0;");
 		options.setBackground(new Background(

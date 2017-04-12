@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import com.franckyi.mpb.MPBConfig;
 import com.franckyi.mpb.MPBConfig.EnumConfig;
+import com.franckyi.mpb.view.MPBFonts;
 import com.franckyi.mpb.view.nodes.NormalButton;
 import com.jfoenix.controls.JFXToggleButton;
 
@@ -29,14 +30,14 @@ public class SettingsController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		cancel = new NormalButton("Cancel", Color.web("#E49788"));
 		cancel.setPrefWidth(150);
-		cancel.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+		cancel.setFont(MPBFonts.BIG_20);
 		cancel.setTextFill(Color.WHITE);
 		cancel.setOnAction(e -> {
 			loadValues();
 		});
 		reset = new NormalButton("Defaults", Color.web("#7FA5C4"));
 		reset.setPrefWidth(150);
-		reset.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+		reset.setFont(MPBFonts.BIG_20);
 		reset.setTextFill(Color.WHITE);
 		reset.setOnAction(e -> {
 			MPBConfig.defaults();
@@ -44,7 +45,7 @@ public class SettingsController implements Initializable {
 		});
 		save = new NormalButton("Save", Color.web("#8CAF62"));
 		save.setPrefWidth(150);
-		save.setFont(Font.font("Segoe UI", FontWeight.BOLD, 18));
+		save.setFont(MPBFonts.BIG_20);
 		save.setTextFill(Color.WHITE);
 		save.setOnAction(e -> {
 			saveValues();

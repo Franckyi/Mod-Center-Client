@@ -1,12 +1,12 @@
 package com.franckyi.mpb.view.region;
 
+import com.franckyi.mpb.view.MPBFonts;
 import com.jfoenix.controls.JFXProgressBar;
 
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class LoadingPane extends VBox {
 	
@@ -18,7 +18,7 @@ public class LoadingPane extends VBox {
 		this.setSpacing(20);
 		this.setAlignment(Pos.CENTER);
 		label = new Label("Loading...");
-		label.setFont(new Font("Segoe UI", 24));
+		label.setFont(MPBFonts.BIG_24);
 		progressBar = new JFXProgressBar();
 		this.getChildren().addAll(label, progressBar);
 	}

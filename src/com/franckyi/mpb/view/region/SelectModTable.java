@@ -6,6 +6,7 @@ import com.franckyi.mpb.core.ModFileCell;
 import com.franckyi.mpb.core.ModFileCell.ModFileCellDLButton;
 import com.franckyi.mpb.core.json.JsonMod;
 import com.franckyi.mpb.core.json.JsonModFile;
+import com.franckyi.mpb.view.MPBFonts;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -19,7 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 
 public class SelectModTable extends Pane {
 
@@ -76,7 +76,7 @@ public class SelectModTable extends Pane {
 		treeView.getColumns().setAll(versionColumn, typeColumn, nameColumn, downloadColumn);
 
 		Label search = new Label("Search :");
-		search.setFont(Font.font("Segoe UI", 16));
+		search.setFont(MPBFonts.NORMAL);
 
 		JFXTextField filterField = new JFXTextField();
 		filterField.textProperty().addListener((o, oldVal, newVal) -> {
@@ -85,7 +85,7 @@ public class SelectModTable extends Pane {
 		});
 
 		Label size = new Label();
-		size.setFont(Font.font("Segoe UI", 16));
+		size.setFont(MPBFonts.NORMAL);
 		size.textProperty().bind(Bindings.createStringBinding(() -> treeView.getCurrentItemsCount() + " files found.",
 				treeView.currentItemsCountProperty()));
 

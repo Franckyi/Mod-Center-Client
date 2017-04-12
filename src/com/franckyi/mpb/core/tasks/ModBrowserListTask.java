@@ -63,21 +63,23 @@ public class ModBrowserListTask extends Task<Pane> {
 				if (els == null || els.size() == 0)
 					controller.maxPage = 1;
 				else
-					controller.maxPage = Integer.parseInt(els
-							.get(els.size() - 2).select("a, span")
-							.get(0).html());
+					controller.maxPage = Integer.parseInt(els.get(els.size() - 2).select("a, span").get(0).html());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			MPBApplication.print("Data collected. Rendering...");
-			visualModList = new ArrayList<ModVisual>();
-			for (ModLogical mod : modList) {
-				ModVisual modV = new ModVisual(mod, controller.currentMcVersion);
-				vbox.getChildren().add(modV);
-				visualModList.add(modV);
+			try {
+				visualModList = new ArrayList<ModVisual>();
+				for (ModLogical mod : modList) {
+					ModVisual modV = new ModVisual(mod, controller.currentMcVersion);
+					vbox.getChildren().add(modV);
+					visualModList.add(modV);
+				}
+				MPBApplication.print("Rendering complete. Adding page to cache");
+				cache.put(cacheKey, visualModList);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			MPBApplication.print("Rendering complete. Adding page to cache");
-			cache.put(cacheKey, visualModList);
 		}
 		return vbox;
 	}

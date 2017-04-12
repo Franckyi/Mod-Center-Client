@@ -15,6 +15,7 @@
             <Label alignment="CENTER" layoutX="169.0" layoutY="71.0" prefHeight="58.0" prefWidth="562.0" text="Modpack Builder" textAlignment="CENTER">
                <font>
                   <Font name="Segoe UI Bold" size="48.0" />
+                  <Font name="Cantarell Bold" size="48.0" />
                </font>
             </Label>
          </children>
@@ -32,6 +33,7 @@
                   <Label fx:id="myMods" alignment="CENTER_RIGHT" onMouseEntered="#showMyMods" prefHeight="40.0" prefWidth="250.0" text="My Mods &gt;">
                      <font>
                         <Font name="Segoe UI Bold" size="24.0" />
+                        <Font name="Cantarell Bold" size="24.0" />
                      </font>
                      <padding>
                         <Insets right="5.0" />
@@ -40,6 +42,7 @@
                   <Label fx:id="myModpacks" alignment="CENTER_RIGHT" onMouseEntered="#showMyModpacks" prefHeight="40.0" prefWidth="250.0" text="My Modpacks &gt;">
                      <font>
                         <Font name="Segoe UI Bold" size="24.0" />
+                        <Font name="Cantarell Bold" size="24.0" />
                      </font>
                      <padding>
                         <Insets right="5.0" />
@@ -48,6 +51,7 @@
                   <Label fx:id="modBrowser" alignment="CENTER_RIGHT" onMouseEntered="#showModBrowser" prefHeight="40.0" prefWidth="250.0" text="Mod Browser &gt;">
                      <font>
                         <Font name="Segoe UI Bold" size="24.0" />
+                        <Font name="Cantarell Bold" size="24.0" />
                      </font>
                      <padding>
                         <Insets right="5.0" />
@@ -62,6 +66,7 @@
                   <Label fx:id="settings" alignment="CENTER_RIGHT" onMouseEntered="#showSettings" prefHeight="40.0" prefWidth="250.0" text="Settings &gt;">
                      <font>
                         <Font name="Segoe UI Bold" size="24.0" />
+                        <Font name="Cantarell Bold" size="24.0" />
                      </font>
                      <padding>
                         <Insets right="5.0" />
