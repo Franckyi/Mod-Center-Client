@@ -21,3 +21,4 @@ bin
 
 # MPB specific
 mpbdata
+/target/
