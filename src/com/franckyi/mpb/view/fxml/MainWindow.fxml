@@ -12,7 +12,7 @@
    <children>
       <Pane layoutX="250.0" prefHeight="200.0" prefWidth="900.0">
          <children>
-            <Label layoutX="256.0" layoutY="71.0" prefHeight="58.0" prefWidth="388.0" text="Modpack Builder" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="169.0" layoutY="71.0" prefHeight="58.0" prefWidth="562.0" text="Modpack Builder" textAlignment="CENTER">
                <font>
                   <Font name="Segoe UI Bold" size="48.0" />
                </font>

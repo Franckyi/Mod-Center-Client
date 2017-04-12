@@ -43,9 +43,15 @@
   		<version>1.10.2</version>
   	</dependency>
   	<dependency>
-  		<groupId>org.aeonbits.owner</groupId>
-  		<artifactId>owner</artifactId>
-  		<version>1.0.9</version>
+  		<groupId>org.apache.commons</groupId>
+  		<artifactId>commons-configuration2</artifactId>
+  		<version>2.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>commons-beanutils</groupId>
+  		<artifactId>commons-beanutils</artifactId>
+  		<version>1.9.3</version>
   	</dependency>
   </dependencies>
+  <url>https://github.com/Franckyi/Modpack-Builder</url>
 </project>
