@@ -9,26 +9,32 @@ import com.franckyi.mpb.MPBConfig.EnumConfig;
 import com.franckyi.mpb.view.MPBFonts;
 import com.franckyi.mpb.view.fxml.FXMLFile;
 import com.franckyi.mpb.view.nodes.NormalButton;
+import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class SettingsController implements Initializable {
 
 	@FXML
-	private ToggleButton displayModsThumbnail;
+	private JFXToggleButton displayModsThumbnail;
 
 	@FXML
 	private HBox buttonsPane;
+
+	@FXML
+	public ScrollPane settingsScrollPane;
 
 	private NormalButton cancel, reset, save;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		settingsScrollPane.setStyle(
+				"-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;");
 		cancel = new NormalButton("Cancel", Color.web("#E49788"));
 		cancel.setPrefWidth(150);
 		cancel.setFont(MPBFonts.BIG_20);
