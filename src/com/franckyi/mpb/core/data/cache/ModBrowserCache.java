@@ -11,8 +11,8 @@ public class ModBrowserCache extends HashMap<ModBrowserCacheKey, List<ModVisual>
 
 	@Override
 	public List<ModVisual> get(Object key) {
-		for(ModBrowserCacheKey key2 : keySet())
-			if(key2.equals(key)) {
+		for (ModBrowserCacheKey key2 : keySet())
+			if (key2.equals(key)) {
 				return super.get(key2);
 			}
 		return null;
@@ -20,8 +20,8 @@ public class ModBrowserCache extends HashMap<ModBrowserCacheKey, List<ModVisual>
 
 	@Override
 	public boolean containsKey(Object key) {
-		for(ModBrowserCacheKey key2 : keySet())
-			if(key2.equals(key))
+		for (ModBrowserCacheKey key2 : keySet())
+			if (key2.equals(key))
 				return true;
 		return false;
 	}

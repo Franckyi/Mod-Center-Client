@@ -32,12 +32,12 @@
             </Label>
             <VBox prefWidth="425.0">
                <children>
-                  <JFXToggleButton fx:id="displayModsThumbnail" selected="true" text="Display mods thumbnail (disable this if loading is too slow)">
+                  <ToggleButton fx:id="displayModsThumbnail" selected="true" text="Display mods thumbnail (disable this if loading is too slow)">
                      <font>
                         <Font name="Segoe UI" size="18.0" />
                         <Font name="Cantarell" size="18.0" />
                      </font>
-                  </JFXToggleButton>
+                  </ToggleButton>
                   <JFXButton onAction="#clearWebCache" style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;" text="Clear web cache">
                      <VBox.margin>
                         <Insets left="10.0" />

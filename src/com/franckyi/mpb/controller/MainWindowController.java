@@ -25,16 +25,16 @@ public class MainWindowController implements Initializable {
 
 	@FXML
 	private VBox menu;
-	
+
 	@FXML
 	private ImageView logo;
-	
+
 	@FXML
 	private Pane body;
-	
+
 	@FXML
 	private Label myMods, myModpacks, modBrowser, settings;
-	
+
 	private List<Label> topMenu, bottomMenu, allMenu;
 
 	@Override
@@ -62,29 +62,29 @@ public class MainWindowController implements Initializable {
 		show(modBrowser);
 		body.getChildren().add(MPBApplication.INSTANCE.parents.get(FXMLFile.MOD_BROWSER));
 	}
-	
+
 	@FXML
 	void showSettings(MouseEvent event) {
 		show(settings);
 		body.getChildren().add(MPBApplication.INSTANCE.parents.get(FXMLFile.SETTINGS));
 	}
-	
+
 	private void show(Label l) {
 		body.getChildren().clear();
 		select(l);
-		for(Label label : allMenu)
-			if(!label.equals(l))
+		for (Label label : allMenu)
+			if (!label.equals(l))
 				unselect(label);
 	}
-	
+
 	private void select(Label label) {
 		label.setTextFill(Color.WHITE);
-		if(topMenu.contains(label))
+		if (topMenu.contains(label))
 			label.setBackground(new Background(new BackgroundFill(Color.web("#8CAF62"), null, null)));
 		else
 			label.setBackground(new Background(new BackgroundFill(Color.web("#7FA5C4"), null, null)));
 	}
-	
+
 	private void unselect(Label label) {
 		label.setTextFill(Color.BLACK);
 		label.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));

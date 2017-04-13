@@ -6,13 +6,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import com.franckyi.mpb.MPBApplication;
 import com.franckyi.mpb.core.curse.CurseURLFormatter;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class ViewModEvent implements EventHandler<ActionEvent> {
-	
+
 	private String projectUrl;
 
 	public ViewModEvent(String projectUrl) {
@@ -22,21 +23,33 @@ public class ViewModEvent implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		try {
-			openWebpage(new URL(CurseURLFormatter.baseUrl + "/" + projectUrl).toURI());
+			MPBApplication.print("Opening webpage : " + projectUrl);
+			new ViewModThread(new URL(CurseURLFormatter.baseUrl + "/" + projectUrl).toURI()).start();
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void openWebpage(URI uri) {
-	    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-	    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-	        try {
-	            desktop.browse(uri);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-	    }
+
+	private class ViewModThread extends Thread {
+
+		private URI uri;
+
+		private ViewModThread(URI uri) {
+			this.uri = uri;
+		}
+
+		@Override
+		public void run() {
+			Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+			if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+				try {
+					desktop.browse(uri);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 	}
 
 }

@@ -15,7 +15,7 @@ public class MPBConfig {
 	private static Configurations configs;
 	private static FileBasedConfigurationBuilder<PropertiesConfiguration> builder;
 	private static Configuration cfg;
-	
+
 	public static void initConfig() {
 		configs = new Configurations();
 		loadConfig();
@@ -26,8 +26,8 @@ public class MPBConfig {
 			builder = configs.propertiesBuilder(DataFiles.CONFIG_FILE);
 			DataFiles.CONFIG_FILE.createNewFile();
 			cfg = builder.getConfiguration();
-			for(EnumConfig config : EnumConfig.values())
-				if(!cfg.containsKey(config.key)){
+			for (EnumConfig config : EnumConfig.values())
+				if (!cfg.containsKey(config.key)) {
 					MPBApplication.print("Generating default configuration file");
 					defaults();
 					builder.save();
@@ -38,7 +38,7 @@ public class MPBConfig {
 	}
 
 	public static boolean getBoolean(EnumConfig config) {
-		if(cfg.containsKey(config.key))
+		if (cfg.containsKey(config.key))
 			return Boolean.parseBoolean(cfg.getProperty(config.key).toString());
 		return false;
 	}
@@ -56,7 +56,7 @@ public class MPBConfig {
 	}
 
 	public static void defaults() {
-		for(EnumConfig config : EnumConfig.values())
+		for (EnumConfig config : EnumConfig.values())
 			setProperty(config, config.value);
 	}
 
@@ -67,15 +67,15 @@ public class MPBConfig {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public enum EnumConfig {
-		
+
 		displayModsThumbnail(true);
-		
+
 		public String key;
 		public Object value;
-		
-		EnumConfig(Object value){
+
+		EnumConfig(Object value) {
 			this.key = this.toString();
 			this.value = value;
 		}

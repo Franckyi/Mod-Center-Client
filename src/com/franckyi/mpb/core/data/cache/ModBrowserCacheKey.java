@@ -4,11 +4,11 @@ import com.franckyi.mpb.core.curse.MCVersion;
 import com.franckyi.mpb.core.curse.SortFilter;
 
 public class ModBrowserCacheKey {
-	
+
 	private int page;
 	private MCVersion mcVersion;
 	private SortFilter sortFilter;
-	
+
 	public ModBrowserCacheKey(int page, MCVersion mcVersion, SortFilter sortFilter) {
 		this.page = page;
 		this.mcVersion = mcVersion;
@@ -44,7 +44,5 @@ public class ModBrowserCacheKey {
 			return false;
 		return true;
 	}
-	
-	
 
 }

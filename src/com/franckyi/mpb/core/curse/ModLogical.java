@@ -1,7 +1,7 @@
 package com.franckyi.mpb.core.curse;
 
 public class ModLogical {
-	
+
 	private String image;
 	private String name;
 	private String monthlyDl;
@@ -9,8 +9,9 @@ public class ModLogical {
 	private String updated;
 	private String created;
 	private String projectUrl;
-	
-	public ModLogical(String image, String name, String projectUrl, String monthlyDl, String totalDl, String updated, String created) {
+
+	public ModLogical(String image, String name, String projectUrl, String monthlyDl, String totalDl, String updated,
+			String created) {
 		this.image = image;
 		this.name = name;
 		this.projectUrl = projectUrl;
@@ -47,7 +48,5 @@ public class ModLogical {
 	public String getProjectUrl() {
 		return projectUrl;
 	}
-	
-	
 
 }

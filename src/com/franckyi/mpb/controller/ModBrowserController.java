@@ -52,7 +52,8 @@ public class ModBrowserController implements Initializable {
 		currentMcVersion = mcVersion.getValue();
 		currentSortFilter = sortFilter.getValue();
 		modBrowserScrollPane.setContent(new LoadingPane());
-		modBrowserScrollPane.setStyle("-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;");
+		modBrowserScrollPane.setStyle(
+				"-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;");
 		first.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
 		previous.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
 		next.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
@@ -129,11 +130,11 @@ public class ModBrowserController implements Initializable {
 
 	public void updateButtons() {
 		modBrowserScrollPane.requestFocus();
-		if(page == maxPage) {
+		if (page == maxPage) {
 			next.setDisable(true);
 			last.setDisable(true);
 		}
-		if(page == 1) {
+		if (page == 1) {
 			first.setDisable(true);
 			previous.setDisable(true);
 		}

@@ -9,18 +9,18 @@ import com.franckyi.mpb.MPBConfig.EnumConfig;
 import com.franckyi.mpb.view.MPBFonts;
 import com.franckyi.mpb.view.fxml.FXMLFile;
 import com.franckyi.mpb.view.nodes.NormalButton;
-import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class SettingsController implements Initializable {
 
 	@FXML
-	private JFXToggleButton displayModsThumbnail;
+	private ToggleButton displayModsThumbnail;
 
 	@FXML
 	private HBox buttonsPane;
@@ -54,11 +54,12 @@ public class SettingsController implements Initializable {
 		buttonsPane.getChildren().addAll(cancel, reset, save);
 		loadValues();
 	}
-	
+
 	@FXML
-	void clearWebCache(ActionEvent e){
+	void clearWebCache(ActionEvent e) {
 		MPBApplication.INSTANCE.cache.clear();
-		((ModBrowserController) MPBApplication.INSTANCE.parents.get(FXMLFile.MOD_BROWSER).getUserData()).updateModBrowser();
+		((ModBrowserController) MPBApplication.INSTANCE.parents.get(FXMLFile.MOD_BROWSER).getUserData())
+				.updateModBrowser();
 	}
 
 	private void loadValues() {

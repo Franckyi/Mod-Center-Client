@@ -9,10 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class LoadingPane extends VBox {
-	
+
 	private Label label;
 	private JFXProgressBar progressBar;
-	
+
 	public LoadingPane() {
 		this.setPrefSize(900, 100);
 		this.setSpacing(20);
@@ -22,12 +22,12 @@ public class LoadingPane extends VBox {
 		progressBar = new JFXProgressBar();
 		this.getChildren().addAll(label, progressBar);
 	}
-	
+
 	public LoadingPane(String text) {
 		this();
 		label.setText(text);
 	}
-	
+
 	public LoadingPane(String text, ObservableValue<Number> value) {
 		this(text);
 		progressBar.progressProperty().bind(value);

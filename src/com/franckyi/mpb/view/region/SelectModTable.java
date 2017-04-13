@@ -57,20 +57,22 @@ public class SelectModTable extends Pane {
 			else
 				return nameColumn.getComputedValue(param);
 		});
-		
+
 		JFXTreeTableColumn<ModFileCell, ModFileCellDLButton> downloadColumn = new JFXTreeTableColumn<>("Download");
 		downloadColumn.setPrefWidth(200);
-		downloadColumn.setCellValueFactory((TreeTableColumn.CellDataFeatures<ModFileCell, ModFileCellDLButton> param) -> {
-			if (downloadColumn.validateValue(param))
-				return param.getValue().getValue().download;
-			else
-				return downloadColumn.getComputedValue(param);
-		});
+		downloadColumn
+				.setCellValueFactory((TreeTableColumn.CellDataFeatures<ModFileCell, ModFileCellDLButton> param) -> {
+					if (downloadColumn.validateValue(param))
+						return param.getValue().getValue().download;
+					else
+						return downloadColumn.getComputedValue(param);
+				});
 
 		final TreeItem<ModFileCell> root = new RecursiveTreeItem<ModFileCell>(files, RecursiveTreeObject::getChildren);
 
 		JFXTreeTableView<ModFileCell> treeView = new JFXTreeTableView<ModFileCell>(root);
-		treeView.setStyle("-fx-font-family: 'Segoe UI', sans-serif; -fx-font-size: 16px; -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;");
+		treeView.setStyle(
+				"-fx-font-family: 'Segoe UI', sans-serif; -fx-font-size: 16px; -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;");
 		treeView.setShowRoot(false);
 		treeView.setEditable(false);
 		treeView.getColumns().setAll(versionColumn, typeColumn, nameColumn, downloadColumn);
