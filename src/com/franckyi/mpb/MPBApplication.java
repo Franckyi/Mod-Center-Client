@@ -31,10 +31,16 @@ public class MPBApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		INSTANCE = this;	
-		for(FXMLFile file : FXMLFile.values()) {
+		INSTANCE = this;
+		for (FXMLFile file : FXMLFile.values()) {
 			print("Loading FXML : " + file.url);
-			parents.put(file, FXMLLoader.load(getClass().getResource(file.url)));
+			if (file.equals(FXMLFile.MOD_BROWSER)) {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource(file.url));
+				Parent root = loader.load();
+				root.setUserData(loader.getController());
+				parents.put(file, root);
+			} else
+				parents.put(file, FXMLLoader.load(getClass().getResource(file.url)));
 		}
 		secondaryStage.setResizable(false);
 		secondaryStage.setAlwaysOnTop(true);
@@ -48,13 +54,14 @@ public class MPBApplication extends Application {
 
 	public static void main(String[] args) {
 		print(TITLE + " v" + VERSION + " by " + AUTHOR);
-		DataFiles.DATA_FOLDER.mkdir();
+		DataFiles.MOD_CACHE_FOLDER.mkdirs();
 		MPBConfig.initConfig();
 		launch(args);
 	}
 
 	public static void print(String str) {
-		System.out.println("[" + dtf.format(LocalDateTime.now()) + "] {" + Thread.currentThread().getName() + "} " + str);
+		System.out
+				.println("[" + dtf.format(LocalDateTime.now()) + "] {" + Thread.currentThread().getName() + "} " + str);
 	}
 
 }

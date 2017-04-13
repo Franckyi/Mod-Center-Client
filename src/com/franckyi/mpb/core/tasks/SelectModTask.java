@@ -97,7 +97,7 @@ public class SelectModTask extends Task<Void> {
 	}
 
 	public static void startDownload(String dlUrl, String fileName, JsonModFile modFile, String modTitle) throws MalformedURLException {
-		DownloadModTask task = new DownloadModTask(new URL(dlUrl), new File(DataFiles.DATA_FOLDER.getPath() + fileName));
+		DownloadModTask task = new DownloadModTask(new URL(dlUrl), new File(DataFiles.MOD_CACHE_FOLDER.getPath() + "/" + fileName));
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {

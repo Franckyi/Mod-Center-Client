@@ -3,18 +3,19 @@ package com.franckyi.mpb.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.franckyi.mpb.MPBApplication;
 import com.franckyi.mpb.MPBConfig;
 import com.franckyi.mpb.MPBConfig.EnumConfig;
 import com.franckyi.mpb.view.MPBFonts;
+import com.franckyi.mpb.view.fxml.FXMLFile;
 import com.franckyi.mpb.view.nodes.NormalButton;
 import com.jfoenix.controls.JFXToggleButton;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 
 public class SettingsController implements Initializable {
 
@@ -52,6 +53,12 @@ public class SettingsController implements Initializable {
 		});
 		buttonsPane.getChildren().addAll(cancel, reset, save);
 		loadValues();
+	}
+	
+	@FXML
+	void clearWebCache(ActionEvent e){
+		MPBApplication.INSTANCE.cache.clear();
+		((ModBrowserController) MPBApplication.INSTANCE.parents.get(FXMLFile.MOD_BROWSER).getUserData()).updateModBrowser();
 	}
 
 	private void loadValues() {

@@ -25,7 +25,5 @@ public class ModBrowserCache extends HashMap<ModBrowserCacheKey, List<ModVisual>
 				return true;
 		return false;
 	}
-	
-	
 
 }
