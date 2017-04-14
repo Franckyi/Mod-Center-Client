@@ -2,8 +2,6 @@ package com.franckyi.mpb.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.franckyi.mpb.core.curse.MCVersion;
 import com.franckyi.mpb.core.curse.SortFilter;
@@ -20,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -34,8 +33,6 @@ public class ModBrowserController implements Initializable {
 	
 	public int page = 1;
 	public int maxPage;
-	
-	private Timer timer = new Timer();
 
 	@FXML
 	private Label pageNumber;
@@ -92,9 +89,12 @@ public class ModBrowserController implements Initializable {
 	
 	 @FXML
 	 void searchFilterChanged(KeyEvent event) {
-		 timer.cancel();
-		 timer = new Timer();
-		 timer.schedule(new SearchTimerTask(), 3000);
+		 if(event.getCode().equals(KeyCode.ENTER)){
+			 currentSearchText = search.getText();
+			 Thread t = new Thread(new SearchModsTask(currentSearchText));
+			 t.setName("SearchModsTask");
+			 t.start();
+		 }
 	 }
 
 	@FXML
@@ -158,20 +158,6 @@ public class ModBrowserController implements Initializable {
 			first.setDisable(true);
 			previous.setDisable(true);
 		}
-	}
-	
-	public class SearchTimerTask extends TimerTask {
-
-
-		@Override
-		public void run() {
-//			lock(true);
-			currentSearchText = search.getText();
-			Thread t = new Thread(new SearchModsTask(currentSearchText));
-			t.setName("SearchModsTask");
-			t.start();
-		}
-
 	}
 
 }

@@ -40,7 +40,7 @@
                         <Font name="Cantarell" size="18.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="search" onKeyTyped="#searchFilterChanged" prefWidth="150.0">
+                  <JFXTextField fx:id="search" onKeyReleased="#searchFilterChanged" prefWidth="150.0">
                      <font>
                      	<Font name="Segoe UI" size="16.0" />
                         <Font name="Cantarell" size="16.0" />
