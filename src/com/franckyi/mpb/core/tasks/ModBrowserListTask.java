@@ -39,7 +39,7 @@ public class ModBrowserListTask extends Task<Pane> {
 		List<ModVisual> visualModList = null;
 		VBox vbox = new VBox();
 		ModBrowserCacheKey cacheKey = new ModBrowserCacheKey(controller.page, controller.currentMcVersion,
-				controller.currentSortFilter);
+				controller.currentSortFilter, controller.currentSearchText);
 		if (cache.containsKey(cacheKey)) {
 			MPBApplication.print("Reloading data from cache");
 			visualModList = cache.get(cacheKey);

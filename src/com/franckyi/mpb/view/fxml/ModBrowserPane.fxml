@@ -10,9 +10,9 @@
    <children>
       <HBox prefHeight="50.0" prefWidth="900.0" spacing="10.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="450.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="10.0">
                <children>
-                  <Label text="Minecraft Version :">
+                  <Label text="MC Version :">
                      <font>
                         <Font name="Segoe UI" size="18.0" />
                         <Font name="Cantarell" size="18.0" />
@@ -21,7 +21,7 @@
                   <JFXComboBox fx:id="mcVersion" focusColor="#40a84b" onAction="#mcVersionChanged" prefWidth="100.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="450.0" spacing="10.0">
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="10.0">
                <children>
                   <Label text="Sort by :">
                      <font>
@@ -30,6 +30,22 @@
                      </font>
                   </Label>
                   <JFXComboBox fx:id="sortFilter" focusColor="#a84040" onAction="#sortFilterChanged" prefWidth="200.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="10.0">
+               <children>
+                  <Label text="Search :">
+                     <font>
+                        <Font name="Segoe UI" size="18.0" />
+                        <Font name="Cantarell" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="search" onKeyTyped="#searchFilterChanged" prefWidth="150.0">
+                     <font>
+                     	<Font name="Segoe UI" size="16.0" />
+                        <Font name="Cantarell" size="16.0" />
+                     </font>
+                  </JFXTextField>
                </children>
             </HBox>
          </children>

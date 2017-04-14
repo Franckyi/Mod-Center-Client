@@ -8,11 +8,13 @@ public class ModBrowserCacheKey {
 	private int page;
 	private MCVersion mcVersion;
 	private SortFilter sortFilter;
+	private String search;
 
-	public ModBrowserCacheKey(int page, MCVersion mcVersion, SortFilter sortFilter) {
+	public ModBrowserCacheKey(int page, MCVersion mcVersion, SortFilter sortFilter, String search) {
 		this.page = page;
 		this.mcVersion = mcVersion;
 		this.sortFilter = sortFilter;
+		this.search = search;
 	}
 
 	public int getPage() {
@@ -26,6 +28,10 @@ public class ModBrowserCacheKey {
 	public SortFilter getSortFilter() {
 		return sortFilter;
 	}
+	
+	public String getSearchFilter() {
+		return search;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -36,6 +42,8 @@ public class ModBrowserCacheKey {
 		if (getClass() != obj.getClass())
 			return false;
 		ModBrowserCacheKey other = (ModBrowserCacheKey) obj;
+		if (search == other.search)
+			return true;
 		if (mcVersion != other.mcVersion)
 			return false;
 		if (page != other.page)

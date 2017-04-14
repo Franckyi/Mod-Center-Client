@@ -2,13 +2,17 @@ package com.franckyi.mpb.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.franckyi.mpb.core.curse.MCVersion;
 import com.franckyi.mpb.core.curse.SortFilter;
 import com.franckyi.mpb.core.tasks.ModBrowserListTask;
+import com.franckyi.mpb.core.tasks.SearchModsTask;
 import com.franckyi.mpb.view.region.LoadingPane;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -25,8 +30,12 @@ public class ModBrowserController implements Initializable {
 
 	public MCVersion currentMcVersion;
 	public SortFilter currentSortFilter;
+	public String currentSearchText;
+	
 	public int page = 1;
 	public int maxPage;
+	
+	private Timer timer = new Timer();
 
 	@FXML
 	private Label pageNumber;
@@ -36,6 +45,9 @@ public class ModBrowserController implements Initializable {
 
 	@FXML
 	private JFXComboBox<MCVersion> mcVersion;
+	
+	@FXML
+	public JFXTextField search;
 
 	@FXML
 	public ScrollPane modBrowserScrollPane;
@@ -77,6 +89,13 @@ public class ModBrowserController implements Initializable {
 			updateModBrowser();
 		}
 	}
+	
+	 @FXML
+	 void searchFilterChanged(KeyEvent event) {
+		 timer.cancel();
+		 timer = new Timer();
+		 timer.schedule(new SearchTimerTask(), 3000);
+	 }
 
 	@FXML
 	void firstPage(ActionEvent event) {
@@ -122,6 +141,7 @@ public class ModBrowserController implements Initializable {
 	public void lock(boolean b) {
 		mcVersion.setDisable(b);
 		sortFilter.setDisable(b);
+		search.setDisable(b);
 		first.setDisable(b);
 		previous.setDisable(b);
 		next.setDisable(b);
@@ -138,6 +158,20 @@ public class ModBrowserController implements Initializable {
 			first.setDisable(true);
 			previous.setDisable(true);
 		}
+	}
+	
+	public class SearchTimerTask extends TimerTask {
+
+
+		@Override
+		public void run() {
+//			lock(true);
+			currentSearchText = search.getText();
+			Thread t = new Thread(new SearchModsTask(currentSearchText));
+			t.setName("SearchModsTask");
+			t.start();
+		}
+
 	}
 
 }
