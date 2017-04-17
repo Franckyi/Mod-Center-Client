@@ -2,6 +2,7 @@ package com.franckyi.mpb.view.nodes;
 
 import com.franckyi.mpb.core.curse.MCVersion;
 import com.franckyi.mpb.core.curse.ModLogical;
+import com.franckyi.mpb.core.curse.SearchedModLogical;
 import com.franckyi.mpb.core.tasks.SelectModTask;
 import com.franckyi.mpb.view.MPBFonts;
 import com.jfoenix.controls.JFXButton;
@@ -40,11 +41,26 @@ public class DownloadButton extends HBox {
 				new BackgroundFill(Color.web("#8CAF62"), new CornerRadii(0, 10, 10, 0, false), Insets.EMPTY)));
 		options.setPrefSize(60, 50);
 		options.setOnAction(e -> {
-			Thread task = new Thread(new SelectModTask(mod.getProjectUrl(), version, false));
+			Thread task = new Thread(new SelectModTask(mod.getProjectUrl(), false));
 			task.setName("SelectModTask");
 			task.start();
 		});
 		this.getChildren().addAll(download, options);
+	}
+
+	public DownloadButton(SearchedModLogical mod) {
+		download = new JFXButton("Download...");
+		download.setFont(MPBFonts.BIG_20);
+		download.setTextFill(Color.WHITE);
+		download.setStyle("-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;");
+		download.setBackground(new Background(
+				new BackgroundFill(Color.web("#8CAF62"), new CornerRadii(10, 0, 0, 10, false), Insets.EMPTY)));
+		download.setPrefSize(210, 50);
+		download.setOnAction(e -> {
+			Thread task = new Thread(new SelectModTask(mod.getProjectUrl(), false));
+			task.setName("SelectModTask");
+			task.start();
+		});
 	}
 
 }

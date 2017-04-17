@@ -29,22 +29,22 @@ public class ModBrowserListTask extends Task<Pane> {
 	private ModBrowserController controller;
 	private ModBrowserCache cache = MPBApplication.INSTANCE.cache;
 
-	public ModBrowserListTask(MCVersion version, SortFilter sort, int page, ModBrowserController modBrowserController) {
+	public ModBrowserListTask(MCVersion version, SortFilter sort, int page, ModBrowserController controller) {
 		this.url = CurseURLFormatter.format(version, sort, page);
-		this.controller = modBrowserController;
+		this.controller = controller;
 	}
 
 	@Override
 	protected Pane call() throws Exception {
-		List<ModVisual> visualModList = null;
+		List<Object> visualModList = null;
 		VBox vbox = new VBox();
 		ModBrowserCacheKey cacheKey = new ModBrowserCacheKey(controller.page, controller.currentMcVersion,
 				controller.currentSortFilter, controller.currentSearchText);
 		if (cache.containsKey(cacheKey)) {
 			MPBApplication.print("Reloading data from cache");
 			visualModList = cache.get(cacheKey);
-			for (ModVisual modV : visualModList) {
-				vbox.getChildren().add(modV);
+			for (Object modV : visualModList) {
+				vbox.getChildren().add((ModVisual) modV);
 			}
 		} else {
 			MPBApplication.print("Collecting data at " + url.toString());
@@ -69,7 +69,7 @@ public class ModBrowserListTask extends Task<Pane> {
 			}
 			MPBApplication.print("Data collected. Rendering...");
 			try {
-				visualModList = new ArrayList<ModVisual>();
+				visualModList = new ArrayList<Object>();
 				for (ModLogical mod : modList) {
 					ModVisual modV = new ModVisual(mod, controller.currentMcVersion);
 					vbox.getChildren().add(modV);

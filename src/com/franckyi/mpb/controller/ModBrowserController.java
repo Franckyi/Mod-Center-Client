@@ -30,9 +30,13 @@ public class ModBrowserController implements Initializable {
 	public MCVersion currentMcVersion;
 	public SortFilter currentSortFilter;
 	public String currentSearchText;
-	
+
 	public int page = 1;
 	public int maxPage;
+
+	public boolean searching;
+
+	private Thread nextTask;
 
 	@FXML
 	private Label pageNumber;
@@ -42,7 +46,7 @@ public class ModBrowserController implements Initializable {
 
 	@FXML
 	private JFXComboBox<MCVersion> mcVersion;
-	
+
 	@FXML
 	public JFXTextField search;
 
@@ -67,6 +71,7 @@ public class ModBrowserController implements Initializable {
 		previous.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
 		next.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
 		last.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
+		searching = false;
 		updateModBrowser();
 	}
 
@@ -75,7 +80,8 @@ public class ModBrowserController implements Initializable {
 		if (!mcVersion.getValue().equals(currentMcVersion)) {
 			currentMcVersion = mcVersion.getValue();
 			page = 1;
-			updateModBrowser();
+			if (!searching)
+				updateModBrowser();
 		}
 	}
 
@@ -83,19 +89,24 @@ public class ModBrowserController implements Initializable {
 	void sortFilterChanged(ActionEvent event) {
 		if (!sortFilter.getValue().equals(currentSortFilter)) {
 			currentSortFilter = sortFilter.getValue();
-			updateModBrowser();
+			page = 1;
+			if (!searching)
+				updateModBrowser();
 		}
 	}
-	
-	 @FXML
-	 void searchFilterChanged(KeyEvent event) {
-		 if(event.getCode().equals(KeyCode.ENTER)){
-			 currentSearchText = search.getText();
-			 Thread t = new Thread(new SearchModsTask(currentSearchText));
-			 t.setName("SearchModsTask");
-			 t.start();
-		 }
-	 }
+
+	@FXML
+	void searchFilterChanged(KeyEvent event) {
+		if (event.getCode().equals(KeyCode.ENTER)) {
+			if (search.getText().equals(""))
+				searching = false;
+			else {
+				searching = true;
+				currentSearchText = search.getText();
+				updateModBrowser();
+			}
+		}
+	}
 
 	@FXML
 	void firstPage(ActionEvent event) {
@@ -133,9 +144,14 @@ public class ModBrowserController implements Initializable {
 		lock(true);
 		modBrowserScrollPane.setContent(new LoadingPane());
 		pageNumber.setText("Page n°" + page);
-		Thread task = new Thread(new ModBrowserListTask(currentMcVersion, currentSortFilter, page, this));
-		task.setName("ModBrowserListTask");
-		task.start();
+		if (searching) {
+			nextTask = new Thread(new SearchModsTask(currentSearchText, page, this));
+			nextTask.setName("SearchModsTask");
+		} else {
+			nextTask = new Thread(new ModBrowserListTask(currentMcVersion, currentSortFilter, page, this));
+			nextTask.setName("ModBrowserListTask");
+		}
+		nextTask.start();
 	}
 
 	public void lock(boolean b) {

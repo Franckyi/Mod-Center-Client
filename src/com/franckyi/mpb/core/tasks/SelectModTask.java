@@ -45,6 +45,11 @@ public class SelectModTask extends Task<Void> {
 		this.latest = latest;
 	}
 
+	public SelectModTask(String projectUrl, boolean latest) {
+		this.projectUrl = projectUrl;
+		this.latest = latest;
+	}
+
 	@Override
 	protected Void call() throws Exception {
 		Platform.runLater(new Runnable() {

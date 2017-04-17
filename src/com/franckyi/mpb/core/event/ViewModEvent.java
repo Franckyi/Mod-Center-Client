@@ -24,7 +24,9 @@ public class ViewModEvent implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		try {
 			MPBApplication.print("Opening webpage : " + projectUrl);
-			new ViewModThread(new URL(CurseURLFormatter.baseUrl + "/" + projectUrl).toURI()).start();
+			new ViewModThread(
+					new URL(CurseURLFormatter.curseUrl + CurseURLFormatter.browserUrl + "/" + projectUrl).toURI())
+							.start();
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();
 		}

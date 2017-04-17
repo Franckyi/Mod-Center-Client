@@ -28,10 +28,11 @@ public class MPBConfig {
 			cfg = builder.getConfiguration();
 			for (EnumConfig config : EnumConfig.values())
 				if (!cfg.containsKey(config.key)) {
-					MPBApplication.print("Generating default configuration file");
+					MPBApplication.print("Generating default configuration file...");
 					defaults();
 					builder.save();
 				}
+			MPBApplication.print("Configuration loaded");
 		} catch (ConfigurationException | IOException e) {
 			e.printStackTrace();
 		}
@@ -63,6 +64,7 @@ public class MPBConfig {
 	public static void saveConfig() {
 		try {
 			builder.save();
+			MPBApplication.print("Configuration saved");
 		} catch (ConfigurationException e) {
 			e.printStackTrace();
 		}
