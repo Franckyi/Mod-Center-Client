@@ -3,7 +3,7 @@ package com.franckyi.modcenter.client.view;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class MPBFonts {
+public class MCCFonts {
 
 	public static final Font BIG_24 = Font.font("Segoe UI, Cantarell, sans-serif", FontWeight.BOLD, 24);
 	public static final Font BIG_20 = Font.font("Segoe UI, Cantarell, sans-serif", FontWeight.BOLD, 20);

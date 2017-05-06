@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.franckyi.modcenter.client.controller.ModBrowserController">
+<VBox alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.franckyi.modcenter.client.controller.MyModsController">
 	<children>
 		<TitledPane expanded="false" text="Filters" VBox.vgrow="ALWAYS">
 			<content>
@@ -95,7 +95,7 @@
 				<Font name="Cantarell" size="26.5" />
 			</font>
 		</TitledPane>
-		<ScrollPane fx:id="modBrowserScrollPane" pannable="true" prefHeight="698.0" VBox.vgrow="SOMETIMES">
+		<ScrollPane fx:id="myModsScrollPane" pannable="true" prefHeight="698.0" VBox.vgrow="SOMETIMES">
 			<content>
 				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
 			</content>

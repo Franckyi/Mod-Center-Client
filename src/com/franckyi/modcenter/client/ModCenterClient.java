@@ -1,5 +1,6 @@
 package com.franckyi.modcenter.client;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -16,20 +17,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MPBApplication extends Application {
+public class ModCenterClient extends Application {
 
-	// TODO Replace ModLogical with API Project
-	// TODO Replace ModVisual with new ProjectVisual
-	// TODO Change SelectModTable
-	// TODO Add "number of items per page" configuration
-
-	// TODO Move this to another file
-	public static final String TITLE = "Modpack Builder";
-	public static final String VERSION = "0.1.0";
-	public static final String AUTHOR = "Franckyi";
-
-	public static MPBApplication INSTANCE;
-	public MPBConfig config;
+	public static ModCenterClient INSTANCE;
+	public MCCConfig config;
 	public Stage mainStage, secondaryStage = new Stage();
 	public Map<FXMLFile, Parent> parents = new HashMap<>();
 
@@ -38,30 +29,23 @@ public class MPBApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		INSTANCE = this;
-		for (FXMLFile file : FXMLFile.values()) {
-			print("Loading FXML : " + file.url);
-			if (file.equals(FXMLFile.MOD_BROWSER)) {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource(file.url));
-				Parent root = loader.load();
-				root.setUserData(loader.getController());
-				parents.put(file, root);
-			} else
-				parents.put(file, FXMLLoader.load(getClass().getResource(file.url)));
-		}
+		loadFXML(FXMLFile.MOD_BROWSER);
+		loadFXML(FXMLFile.SETTINGS);
+		loadFXML(FXMLFile.MAIN);
 		secondaryStage.setResizable(false);
 		secondaryStage.setAlwaysOnTop(true);
 		mainStage = primaryStage;
 		mainStage.setScene(new Scene(parents.get(FXMLFile.MAIN)));
 		mainStage.setResizable(false);
-		mainStage.setTitle("Modpack Builder 0.1.0");
+		mainStage.setTitle(MCCReference.TITLE + " v" + MCCReference.VERSION);
 		mainStage.show();
 		print("Showing main window");
 	}
 
 	public static void main(String[] args) {
-		print(TITLE + " v" + VERSION + " by " + AUTHOR);
+		print(MCCReference.TITLE + " v" + MCCReference.VERSION + " by " + MCCReference.AUTHOR);
 		DataFiles.MOD_CACHE_FOLDER.mkdirs();
-		MPBConfig.initConfig();
+		MCCConfig.initConfig();
 		try {
 			ModCenterAPI.init();
 			print("Mod Center API initialized");
@@ -80,6 +64,14 @@ public class MPBApplication extends Application {
 	public static void printErr(String str) {
 		System.err
 				.println("[" + dtf.format(LocalDateTime.now()) + "] {" + Thread.currentThread().getName() + "} " + str);
+	}
+
+	public void loadFXML(FXMLFile file) throws IOException {
+		print("Loading FXML : " + file.url);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(file.url));
+		Parent root = loader.load();
+		root.setUserData(loader.getController());
+		parents.put(file, root);
 	}
 
 }

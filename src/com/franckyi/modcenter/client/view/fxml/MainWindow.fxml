@@ -8,18 +8,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.franckyi.mpb.controller.MainWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.franckyi.modcenter.client.controller.MainWindowController">
    <children>
-      <Pane layoutX="250.0" prefHeight="200.0" prefWidth="1050.0">
-         <children>
-            <Label alignment="CENTER" layoutX="244.0" layoutY="66.0" prefHeight="58.0" prefWidth="562.0" text="Modpack Builder" textAlignment="CENTER">
-               <font>
-                  <Font name="Segoe UI Bold" size="48.0" />
-                  <Font name="Cantarell Bold" size="48.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <Button defaultButton="true" mnemonicParsing="false" mouseTransparent="true" prefHeight="3.0" prefWidth="0.0" text="Button" visible="false" />
       <VBox fx:id="menu" prefHeight="1000.0" prefWidth="250.0">
          <children>
             <ImageView fx:id="logo" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -27,7 +18,7 @@
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </VBox.margin>
             </ImageView>
-            <VBox alignment="TOP_RIGHT" prefHeight="400.0" prefWidth="250.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="250.0">
                <children>
                   <Separator prefHeight="1.0" prefWidth="200.0" />
                   <Label fx:id="myMods" alignment="CENTER_RIGHT" onMouseEntered="#showMyMods" prefHeight="40.0" prefWidth="250.0" text="My Mods &gt;">
@@ -60,7 +51,13 @@
                   <Separator prefHeight="1.0" prefWidth="200.0" />
                </children>
             </VBox>
-            <VBox alignment="BOTTOM_RIGHT" prefHeight="300.0" prefWidth="250.0">
+            <VBox fx:id="midMenuBox" prefHeight="400.0" prefWidth="100.0">
+               <children>
+                  <Separator prefHeight="1.0" prefWidth="200.0" />
+                  <Separator prefHeight="1.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_RIGHT" prefHeight="102.0" prefWidth="250.0">
                <children>
                   <Separator prefHeight="1.0" prefWidth="200.0" />
                   <Label fx:id="settings" alignment="CENTER_RIGHT" onMouseEntered="#showSettings" prefHeight="40.0" prefWidth="250.0" text="Settings &gt;">
@@ -77,6 +74,7 @@
             </VBox>
          </children>
       </VBox>
-      <Pane fx:id="body" layoutX="250.0" layoutY="200.0" prefHeight="800.0" prefWidth="1050.0" />
+      <Pane fx:id="body" layoutX="250.0" layoutY="200.0" maxHeight="800.0" prefHeight="800.0" prefWidth="1050.0" />
+      <ImageView fx:id="banner" fitHeight="220.0" fitWidth="1050.0" layoutX="250.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

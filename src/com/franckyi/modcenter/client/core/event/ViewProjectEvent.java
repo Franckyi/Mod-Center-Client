@@ -7,23 +7,23 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import com.franckyi.modcenter.api.CurseURLFormatter;
-import com.franckyi.modcenter.client.MPBApplication;
+import com.franckyi.modcenter.client.ModCenterClient;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class ViewModEvent implements EventHandler<ActionEvent> {
+public class ViewProjectEvent implements EventHandler<ActionEvent> {
 
 	private String projectUrl;
 
-	public ViewModEvent(String projectUrl) {
+	public ViewProjectEvent(String projectUrl) {
 		this.projectUrl = projectUrl;
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
 		try {
-			MPBApplication.print("Opening webpage : " + projectUrl);
+			ModCenterClient.print("Opening webpage : " + projectUrl);
 			new ViewModThread(new URL(CurseURLFormatter.format(projectUrl)).toURI()).start();
 		} catch (URISyntaxException | MalformedURLException e) {
 			e.printStackTrace();

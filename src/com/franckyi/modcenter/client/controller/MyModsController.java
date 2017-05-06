@@ -1,14 +1,22 @@
 package com.franckyi.modcenter.client.controller;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.franckyi.modcenter.api.EnumCategory;
 import com.franckyi.modcenter.api.EnumSortFilter;
-import com.franckyi.modcenter.api.ModCenterAPI;
-import com.franckyi.modcenter.client.core.tasks.ModBrowserListTask;
-import com.franckyi.modcenter.client.view.region.LoadingPane;
+import com.franckyi.modcenter.client.MCCConfig;
+import com.franckyi.modcenter.client.MCCConfig.EnumConfig;
+import com.franckyi.modcenter.client.core.data.DataFiles;
+import com.franckyi.modcenter.client.core.json.JsonModcache;
+import com.franckyi.modcenter.client.core.json.JsonProject;
+import com.franckyi.modcenter.client.core.json.MCCJson;
+import com.franckyi.modcenter.client.view.region.ProjectVisual;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -16,20 +24,17 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 
-public class ModBrowserController implements Initializable {
+public class MyModsController implements Initializable {
 
 	public String currentMcVersion;
 	public EnumSortFilter currentSortFilter;
@@ -61,37 +66,18 @@ public class ModBrowserController implements Initializable {
 	public JFXComboBox<EnumCategory> categories;
 
 	@FXML
-	public ScrollPane modBrowserScrollPane;
+	public ScrollPane myModsScrollPane;
 
 	@FXML
 	private JFXButton first, previous, next, last;
 
+	public static JsonModcache projects;
+	public List<JsonProject> fullList, curList;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		mcVersion.getItems().add("");
-		try {
-			mcVersion.getItems().addAll(ModCenterAPI.getVersions());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		mcVersion.setValue("");
-		sortFilter.getItems().addAll(EnumSortFilter.values());
-		sortFilter.setValue(EnumSortFilter.TOTAL_DL);
-		sortOrder.setImage(new Image(getClass().getResourceAsStream("../view/img/arrow-down.png")));
-		categories.getItems().addAll(EnumCategory.values());
-		categories.setValue(EnumCategory.ANY);
-		currentMcVersion = mcVersion.getValue();
-		currentSortFilter = sortFilter.getValue();
-		currentCategory = categories.getValue();
-		currentSearchText = "";
-		modBrowserScrollPane.setContent(new LoadingPane());
-		modBrowserScrollPane.setStyle(
-				"-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;");
-		first.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
-		previous.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
-		next.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
-		last.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)));
-		updateModBrowser();
+		updateProjects();
+		sortProjects();
 	}
 
 	@FXML
@@ -99,7 +85,7 @@ public class ModBrowserController implements Initializable {
 		if (!mcVersion.getValue().equals(currentMcVersion)) {
 			currentMcVersion = mcVersion.getValue();
 			page = 1;
-			updateModBrowser();
+			sortProjects();
 		}
 	}
 
@@ -108,7 +94,7 @@ public class ModBrowserController implements Initializable {
 		if (!sortFilter.getValue().equals(currentSortFilter)) {
 			currentSortFilter = sortFilter.getValue();
 			page = 1;
-			updateModBrowser();
+			sortProjects();
 		}
 	}
 
@@ -123,7 +109,7 @@ public class ModBrowserController implements Initializable {
 				sortOrder.setImage(new Image(getClass().getResourceAsStream("../view/img/arrow-up.png")));
 			}
 			page = 1;
-			updateModBrowser();
+			sortProjects();
 		}
 	}
 
@@ -132,7 +118,7 @@ public class ModBrowserController implements Initializable {
 		if (event.getCode().equals(KeyCode.ENTER)) {
 			currentSearchText = search.getText();
 			page = 1;
-			updateModBrowser();
+			sortProjects();
 		}
 	}
 
@@ -140,7 +126,7 @@ public class ModBrowserController implements Initializable {
 	void firstPage(ActionEvent event) {
 		if (page > 1) {
 			page = 1;
-			updateModBrowser();
+			sortProjects();
 		}
 	}
 
@@ -148,7 +134,7 @@ public class ModBrowserController implements Initializable {
 	void previousPage(ActionEvent event) {
 		if (page > 1) {
 			page--;
-			updateModBrowser();
+			sortProjects();
 		}
 	}
 
@@ -156,7 +142,7 @@ public class ModBrowserController implements Initializable {
 	void nextPage(ActionEvent event) {
 		if (page < maxPage) {
 			page++;
-			updateModBrowser();
+			sortProjects();
 		}
 	}
 
@@ -164,7 +150,7 @@ public class ModBrowserController implements Initializable {
 	void lastPage(ActionEvent event) {
 		if (page < maxPage) {
 			page = maxPage;
-			updateModBrowser();
+			sortProjects();
 		}
 	}
 
@@ -173,18 +159,38 @@ public class ModBrowserController implements Initializable {
 		if (currentCategory != categories.getValue()) {
 			currentCategory = categories.getValue();
 			page = 1;
-			updateModBrowser();
+			sortProjects();
 		}
 	}
 
-	public void updateModBrowser() {
-		modBrowserScrollPane.setVvalue(0);
-		lock(true);
-		modBrowserScrollPane.setContent(new LoadingPane());
-		pageNumber.setText("Page n°" + page);
-		Thread nextTask = new Thread(new ModBrowserListTask(this));
-		nextTask.setName("ModBrowserListTask");
-		nextTask.start();
+	public void updateProjects() {
+		try {
+			projects = MCCJson.getGson().fromJson(new FileReader(DataFiles.MOD_CACHE_FILE), JsonModcache.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		fullList = new ArrayList<>(projects.values());
+	}
+
+	public void sortProjects() {
+		curList = new ArrayList<>(fullList);
+		curList.sort(new ProjectComparator(currentSortFilter, currentSortOrder));
+		curList = curList.subList(MCCConfig.getInteger(EnumConfig.projectsPerPage) * page - 1,
+				MCCConfig.getInteger(EnumConfig.projectsPerPage) * page);
+		showProjects();
+	}
+
+	public void showProjects() {
+		VBox vbox = new VBox();
+		for (JsonProject project : curList) {
+			vbox.getChildren().add(new Separator());
+			vbox.getChildren().add(new ProjectVisual(project));
+		}
+		if (vbox.getChildren().isEmpty())
+			vbox.getChildren().add(new Label("No projects found"));
+		else
+			vbox.getChildren().remove(0);
+		myModsScrollPane.setContent(vbox);
 	}
 
 	public void lock(boolean b) {
@@ -200,7 +206,7 @@ public class ModBrowserController implements Initializable {
 	}
 
 	public void updateButtons() {
-		modBrowserScrollPane.requestFocus();
+		myModsScrollPane.requestFocus();
 		if (page == maxPage) {
 			next.setDisable(true);
 			last.setDisable(true);
@@ -209,6 +215,33 @@ public class ModBrowserController implements Initializable {
 			first.setDisable(true);
 			previous.setDisable(true);
 		}
+	}
+
+	public class ProjectComparator implements Comparator<JsonProject> {
+
+		private EnumSortFilter filter;
+		private boolean order;
+
+		public ProjectComparator(EnumSortFilter currentSortFilter, boolean currentSortOrder) {
+			filter = currentSortFilter;
+			order = currentSortOrder;
+		}
+
+		@Override
+		public int compare(JsonProject o1, JsonProject o2) {
+			JsonProject p1 = (order) ? o1 : o2;
+			JsonProject p2 = (order) ? o2 : o1;
+			if (filter.equals(EnumSortFilter.NAME))
+				return (p1.getName().compareTo(p2.getName()));
+			if (filter.equals(EnumSortFilter.TOTAL_DL))
+				return (p1.getDownloads() > p2.getDownloads()) ? -1 : 1;
+			if (filter.equals(EnumSortFilter.CREATED))
+				return (p1.getId() > p2.getId()) ? -1 : 1;
+			if (filter.equals(EnumSortFilter.UPDATED))
+				return (p1.getUpdated().compareTo(p2.getUpdated()));
+			return 0;
+		}
+
 	}
 
 }

@@ -3,7 +3,7 @@ package com.franckyi.modcenter.client;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-public class MPBUtils {
+public class MCCUtils {
 
 	private static HashMap<String, Integer> htmlEntities = new HashMap<String, Integer>();
 	static {

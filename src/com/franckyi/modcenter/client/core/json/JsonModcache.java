@@ -2,9 +2,7 @@ package com.franckyi.modcenter.client.core.json;
 
 import java.util.HashMap;
 
-import com.franckyi.modcenter.api.ProjectFile;
-
-public class JsonModcache extends HashMap<String, HashMap<Integer, ProjectFile>> {
+public class JsonModcache extends HashMap<Integer, JsonProject> {
 
 	private static final long serialVersionUID = -3121464917605542981L;
 

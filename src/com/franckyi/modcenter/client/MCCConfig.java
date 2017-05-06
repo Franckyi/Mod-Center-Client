@@ -10,7 +10,7 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 
 import com.franckyi.modcenter.client.core.data.DataFiles;
 
-public class MPBConfig {
+public class MCCConfig {
 
 	private static Configurations configs;
 	private static FileBasedConfigurationBuilder<PropertiesConfiguration> builder;
@@ -28,11 +28,11 @@ public class MPBConfig {
 			cfg = builder.getConfiguration();
 			for (EnumConfig config : EnumConfig.values())
 				if (!cfg.containsKey(config.key)) {
-					MPBApplication.print("Generating default configuration file...");
+					ModCenterClient.print("Generating default configuration file...");
 					defaults();
 					builder.save();
 				}
-			MPBApplication.print("Configuration loaded");
+			ModCenterClient.print("Configuration loaded");
 		} catch (ConfigurationException | IOException e) {
 			e.printStackTrace();
 		}
@@ -64,7 +64,7 @@ public class MPBConfig {
 	public static void saveConfig() {
 		try {
 			builder.save();
-			MPBApplication.print("Configuration saved");
+			ModCenterClient.print("Configuration saved");
 		} catch (ConfigurationException e) {
 			e.printStackTrace();
 		}

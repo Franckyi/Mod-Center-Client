@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import com.franckyi.modcenter.client.MPBApplication;
+import com.franckyi.modcenter.client.ModCenterClient;
 
 import javafx.concurrent.Task;
 
@@ -22,7 +22,7 @@ public class DownloadModTask extends Task<Void> {
 
 	@Override
 	protected Void call() throws Exception {
-		MPBApplication.print("Download started : " + destination.getName());
+		ModCenterClient.print("Download started : " + destination.getName());
 		HttpURLConnection httpConnection = (HttpURLConnection) (source.openConnection());
 		long completeFileSize = httpConnection.getContentLength();
 		BufferedInputStream bis = new BufferedInputStream(httpConnection.getInputStream());

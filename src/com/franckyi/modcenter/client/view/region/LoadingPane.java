@@ -1,6 +1,6 @@
 package com.franckyi.modcenter.client.view.region;
 
-import com.franckyi.modcenter.client.view.MPBFonts;
+import com.franckyi.modcenter.client.view.MCCFonts;
 import com.jfoenix.controls.JFXProgressBar;
 
 import javafx.beans.value.ObservableValue;
@@ -18,7 +18,7 @@ public class LoadingPane extends VBox {
 		this.setSpacing(20);
 		this.setAlignment(Pos.CENTER);
 		label = new Label("Loading...");
-		label.setFont(MPBFonts.BIG_24);
+		label.setFont(MCCFonts.BIG_24);
 		progressBar = new JFXProgressBar();
 		this.getChildren().addAll(label, progressBar);
 	}
