@@ -23,6 +23,7 @@ public class DownloadModTask extends Task<Void> {
 	@Override
 	protected Void call() throws Exception {
 		ModCenterClient.print("Download started : " + destination.getName());
+		this.updateProgress(0, 1);
 		HttpURLConnection httpConnection = (HttpURLConnection) (source.openConnection());
 		long completeFileSize = httpConnection.getContentLength();
 		BufferedInputStream bis = new BufferedInputStream(httpConnection.getInputStream());

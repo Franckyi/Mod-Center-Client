@@ -9,130 +9,177 @@
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TabPane?>
 
-<VBox alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.franckyi.modcenter.client.controller.ModBrowserController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.franckyi.modcenter.client.controller.ModBrowserController">
 	<children>
-		<TitledPane expanded="false" text="Filters" VBox.vgrow="ALWAYS">
-			<content>
-				<AnchorPane>
-					<children>
-						<GridPane prefHeight="100.0">
-							<columnConstraints>
-								<ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
-								<ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="350.0" minWidth="10.0" prefWidth="350.0" />
-                        <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
-                        <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="350.0" minWidth="10.0" prefWidth="350.0" />
-							</columnConstraints>
-							<rowConstraints>
-								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-							</rowConstraints>
+		<TabPane fx:id="tabPane" maxWidth="1050.0">
+			<tabs>
+				<Tab closable="false" text="Mod Browser">
+					<content>
+						<VBox alignment="TOP_LEFT" maxWidth="-Infinity" minHeight="-Infinity"
+							minWidth="-Infinity" prefHeight="798.0" prefWidth="1050.0">
 							<children>
-								<Label prefHeight="21.0" text="MC Version :" GridPane.rowIndex="1">
+								<TitledPane expanded="false" text="Filters"
+									VBox.vgrow="ALWAYS">
+									<content>
+										<AnchorPane>
+											<children>
+												<GridPane prefHeight="100.0">
+													<columnConstraints>
+														<ColumnConstraints halignment="RIGHT"
+															hgrow="NEVER" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+														<ColumnConstraints halignment="LEFT"
+															hgrow="NEVER" maxWidth="350.0" minWidth="10.0" prefWidth="350.0" />
+														<ColumnConstraints halignment="LEFT"
+															hgrow="NEVER" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+														<ColumnConstraints halignment="LEFT"
+															hgrow="NEVER" maxWidth="350.0" minWidth="10.0" prefWidth="350.0" />
+													</columnConstraints>
+													<rowConstraints>
+														<RowConstraints minHeight="10.0"
+															prefHeight="30.0" vgrow="SOMETIMES" />
+														<RowConstraints minHeight="10.0"
+															prefHeight="30.0" vgrow="SOMETIMES" />
+													</rowConstraints>
+													<children>
+														<Label prefHeight="21.0" text="MC Version :"
+															GridPane.rowIndex="1">
+															<font>
+																<Font name="Segoe UI" size="18.0" />
+																<Font name="Cantarell" size="18.0" />
+															</font>
+															<GridPane.margin>
+																<Insets right="10.0" />
+															</GridPane.margin>
+														</Label>
+														<JFXComboBox fx:id="mcVersion" focusColor="#40a84b"
+															onAction="#mcVersionChanged" prefWidth="250.0"
+															GridPane.columnIndex="1" GridPane.rowIndex="1" />
+														<Label text="Sort by :" GridPane.columnIndex="2">
+															<font>
+																<Font name="Segoe UI" size="18.0" />
+																<Font name="Cantarell" size="18.0" />
+															</font>
+															<GridPane.margin>
+																<Insets right="10.0" />
+															</GridPane.margin>
+														</Label>
+														<HBox alignment="CENTER_LEFT" prefHeight="100.0"
+															prefWidth="200.0" spacing="10.0" GridPane.columnIndex="3">
+															<children>
+																<JFXComboBox fx:id="sortFilter" focusColor="#a84040"
+																	onAction="#sortFilterChanged" prefWidth="250.0" />
+																<ImageView fx:id="sortOrder" fitHeight="30.0"
+																	fitWidth="30.0" onMouseClicked="#sortOrderChanged"
+																	pickOnBounds="true" preserveRatio="true">
+																	<cursor>
+																		<Cursor fx:constant="HAND" />
+																	</cursor>
+																</ImageView>
+															</children>
+														</HBox>
+														<Label text="Search :">
+															<font>
+																<Font name="Segoe UI" size="18.0" />
+																<Font name="Cantarell" size="18.0" />
+															</font>
+															<GridPane.margin>
+																<Insets right="10.0" />
+															</GridPane.margin>
+														</Label>
+														<JFXTextField fx:id="search" maxWidth="250.0"
+															onKeyReleased="#searchFilterChanged"
+															GridPane.columnIndex="1">
+															<font>
+																<Font name="Segoe UI" size="16.0" />
+																<Font name="Cantarell" size="16.0" />
+															</font>
+														</JFXTextField>
+														<Label text="Category :" GridPane.columnIndex="2"
+															GridPane.rowIndex="1">
+															<font>
+																<Font name="Segoe UI" size="18.0" />
+																<Font name="Cantarell" size="18.0" />
+															</font>
+															<GridPane.margin>
+																<Insets right="10.0" />
+															</GridPane.margin>
+														</Label>
+														<JFXComboBox fx:id="categories" focusColor="#dae10b"
+															onAction="#categoryChanged" prefWidth="250.0"
+															GridPane.columnIndex="3" GridPane.rowIndex="1" />
+													</children>
+												</GridPane>
+											</children>
+											<padding>
+												<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+											</padding>
+										</AnchorPane>
+									</content>
 									<font>
-										<Font name="Segoe UI" size="18.0" />
-										<Font name="Cantarell" size="18.0" />
+										<Font size="24.0" />
 									</font>
-									<GridPane.margin>
-										<Insets right="10.0" />
-									</GridPane.margin>
-								</Label>
-								<JFXComboBox fx:id="mcVersion" focusColor="#40a84b" onAction="#mcVersionChanged" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-								<Label text="Sort by :" GridPane.columnIndex="2">
-									<font>
-										<Font name="Segoe UI" size="18.0" />
-										<Font name="Cantarell" size="18.0" />
-									</font>
-									<GridPane.margin>
-										<Insets right="10.0" />
-									</GridPane.margin>
-								</Label>
-								<HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="3">
+								</TitledPane>
+								<ScrollPane fx:id="modBrowserScrollPane" pannable="true"
+									VBox.vgrow="SOMETIMES">
+									<content>
+										<AnchorPane minHeight="0.0" minWidth="0.0"
+											prefHeight="200.0" prefWidth="200.0" />
+									</content>
+								</ScrollPane>
+								<HBox alignment="CENTER" minHeight="50.0" prefHeight="50.0"
+									prefWidth="1050.0" spacing="25.0">
 									<children>
-										<JFXComboBox fx:id="sortFilter" focusColor="#a84040" onAction="#sortFilterChanged" prefWidth="250.0" />
-										<ImageView fx:id="sortOrder" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#sortOrderChanged" pickOnBounds="true" preserveRatio="true">
-											<cursor>
-												<Cursor fx:constant="HAND" />
-											</cursor>
-										</ImageView>
+										<JFXButton fx:id="first" onAction="#firstPage"
+											style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;"
+											text="&lt;&lt;">
+											<font>
+												<Font name="Segoe UI" size="18.0" />
+												<Font name="Cantarell" size="18.0" />
+											</font>
+										</JFXButton>
+										<JFXButton fx:id="previous" onAction="#previousPage"
+											prefWidth="125.0"
+											style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;"
+											text="&lt; Previous">
+											<font>
+												<Font name="Segoe UI" size="18.0" />
+												<Font name="Cantarell" size="18.0" />
+											</font>
+										</JFXButton>
+										<Label fx:id="pageNumber" text="Page n°X">
+											<font>
+												<Font name="Segoe UI" size="18.0" />
+												<Font name="Cantarell" size="18.0" />
+											</font>
+										</Label>
+										<JFXButton fx:id="next" onAction="#nextPage"
+											prefWidth="125.0"
+											style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;"
+											text="Next &gt;">
+											<font>
+												<Font name="Segoe UI" size="18.0" />
+												<Font name="Cantarell" size="18.0" />
+											</font>
+										</JFXButton>
+										<JFXButton fx:id="last" onAction="#lastPage"
+											style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;"
+											text="&gt;&gt;">
+											<font>
+												<Font name="Segoe UI" size="18.0" />
+												<Font name="Cantarell" size="18.0" />
+											</font>
+										</JFXButton>
 									</children>
 								</HBox>
-								<Label text="Search :">
-									<font>
-										<Font name="Segoe UI" size="18.0" />
-										<Font name="Cantarell" size="18.0" />
-									</font>
-									<GridPane.margin>
-										<Insets right="10.0" />
-									</GridPane.margin>
-								</Label>
-								<JFXTextField fx:id="search" maxWidth="250.0" onKeyReleased="#searchFilterChanged" GridPane.columnIndex="1">
-									<font>
-										<Font name="Segoe UI" size="16.0" />
-										<Font name="Cantarell" size="16.0" />
-									</font>
-								</JFXTextField>
-								<Label text="Category :" GridPane.columnIndex="2" GridPane.rowIndex="1">
-									<font>
-										<Font name="Segoe UI" size="18.0" />
-										<Font name="Cantarell" size="18.0" />
-									</font>
-									<GridPane.margin>
-										<Insets right="10.0" />
-									</GridPane.margin>
-								</Label>
-								<JFXComboBox fx:id="categories" focusColor="#dae10b" onAction="#categoryChanged" prefWidth="250.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 							</children>
-						</GridPane>
-					</children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-				</AnchorPane>
-			</content>
-			<font>
-				<Font name="Segoe UI" size="26.5" />
-				<Font name="Cantarell" size="26.5" />
-			</font>
-		</TitledPane>
-		<ScrollPane fx:id="modBrowserScrollPane" pannable="true" prefHeight="698.0" VBox.vgrow="SOMETIMES">
-			<content>
-				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-			</content>
-		</ScrollPane>
-		<HBox alignment="CENTER" minHeight="50.0" prefHeight="50.0" prefWidth="1050.0" spacing="25.0">
-			<children>
-				<JFXButton fx:id="first" onAction="#firstPage" style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;" text="&lt;&lt;">
-					<font>
-						<Font name="Segoe UI" size="18.0" />
-						<Font name="Cantarell" size="18.0" />
-					</font>
-				</JFXButton>
-				<JFXButton fx:id="previous" onAction="#previousPage" prefWidth="125.0" style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;" text="&lt; Previous">
-					<font>
-						<Font name="Segoe UI" size="18.0" />
-						<Font name="Cantarell" size="18.0" />
-					</font>
-				</JFXButton>
-				<Label fx:id="pageNumber" text="Page n°X">
-					<font>
-						<Font name="Segoe UI" size="18.0" />
-						<Font name="Cantarell" size="18.0" />
-					</font>
-				</Label>
-				<JFXButton fx:id="next" onAction="#nextPage" prefWidth="125.0" style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;" text="Next &gt;">
-					<font>
-						<Font name="Segoe UI" size="18.0" />
-						<Font name="Cantarell" size="18.0" />
-					</font>
-				</JFXButton>
-				<JFXButton fx:id="last" onAction="#lastPage" style="-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;" text="&gt;&gt;">
-					<font>
-						<Font name="Segoe UI" size="18.0" />
-						<Font name="Cantarell" size="18.0" />
-					</font>
-				</JFXButton>
-			</children>
-		</HBox>
+						</VBox>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
 	</children>
-</VBox>
+</AnchorPane>

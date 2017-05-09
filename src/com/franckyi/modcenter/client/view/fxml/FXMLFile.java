@@ -12,7 +12,7 @@ public class FXMLFile {
 	public static final FXMLFile SETTINGS = new FXMLFile("view/fxml/SettingsPane.fxml");
 	public static final FXMLFile MAIN = new FXMLFile("view/fxml/MainWindow.fxml");
 
-	public static final String SELECT_FILE = "view/fxml/SelectFilePane.fxml";
+	public static final String SELECT_FILE = "view/fxml/SelectFileTab.fxml";
 
 	public String url;
 	public Project project;

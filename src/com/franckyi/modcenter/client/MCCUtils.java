@@ -1,7 +1,6 @@
 package com.franckyi.modcenter.client;
 
 import java.util.HashMap;
-import java.util.StringTokenizer;
 
 public class MCCUtils {
 
@@ -280,8 +279,7 @@ public class MCCUtils {
 						}
 					}
 				} catch (NumberFormatException x) {
-					// Could not parse the entity,
-					// output it verbatim
+					return "error";
 				}
 				result.append(s.substring(lastEnd, ampInd));
 				lastEnd = nextSemi + 1;
@@ -295,23 +293,6 @@ public class MCCUtils {
 		}
 		result.append(s.substring(lastEnd));
 		return result.toString();
-	}
-
-	public static String addLinebreaks(String input, int maxLineLength) {
-		StringTokenizer tok = new StringTokenizer(input, " ");
-		StringBuilder output = new StringBuilder(input.length());
-		int lineLen = 0;
-		while (tok.hasMoreTokens()) {
-			String word = tok.nextToken();
-
-			if (lineLen + word.length() > maxLineLength) {
-				output.append("\n");
-				lineLen = 0;
-			}
-			output.append(word);
-			lineLen += word.length();
-		}
-		return output.toString();
 	}
 
 }

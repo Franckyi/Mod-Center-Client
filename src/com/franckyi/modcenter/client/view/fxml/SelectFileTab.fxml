@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TabPane?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+	minWidth="-Infinity" prefHeight="800.0" prefWidth="1050.0" fx:id="root"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.franckyi.modcenter.client.controller.SelectFileController">
+	<children>
+		<TitledPane expanded="false" text="Filters" VBox.vgrow="ALWAYS">
+			<content>
+				<AnchorPane>
+					<children>
+						<GridPane prefHeight="100.0">
+							<columnConstraints>
+								<ColumnConstraints halignment="RIGHT" hgrow="NEVER"
+									maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+								<ColumnConstraints halignment="LEFT" hgrow="NEVER"
+									maxWidth="350.0" minWidth="10.0" prefWidth="350.0" />
+								<ColumnConstraints halignment="LEFT" hgrow="NEVER"
+									maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+								<ColumnConstraints halignment="LEFT" hgrow="NEVER"
+									maxWidth="350.0" minWidth="10.0" prefWidth="350.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0"
+									vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0"
+									vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<Label prefHeight="21.0" text="MC Version :"
+									GridPane.rowIndex="1">
+									<font>
+										<Font name="Segoe UI" size="18.0" />
+										<Font name="Cantarell" size="18.0" />
+									</font>
+									<GridPane.margin>
+										<Insets right="10.0" />
+									</GridPane.margin>
+								</Label>
+								<JFXComboBox fx:id="mcVersion" focusColor="#40a84b"
+									onAction="#mcVersionChanged" prefWidth="250.0"
+									GridPane.columnIndex="1" GridPane.rowIndex="1" />
+								<Label text="Sort by :" GridPane.columnIndex="2">
+									<font>
+										<Font name="Segoe UI" size="18.0" />
+										<Font name="Cantarell" size="18.0" />
+									</font>
+									<GridPane.margin>
+										<Insets right="10.0" />
+									</GridPane.margin>
+								</Label>
+								<HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0"
+									spacing="10.0" GridPane.columnIndex="3">
+									<children>
+										<JFXComboBox fx:id="sortFilter" focusColor="#a84040"
+											onAction="#sortFilterChanged" prefWidth="250.0" />
+										<ImageView fx:id="sortOrder" fitHeight="30.0"
+											fitWidth="30.0" onMouseClicked="#sortOrderChanged"
+											pickOnBounds="true" preserveRatio="true">
+											<cursor>
+												<Cursor fx:constant="HAND" />
+											</cursor>
+										</ImageView>
+									</children>
+								</HBox>
+								<Label text="Search :">
+									<font>
+										<Font name="Segoe UI" size="18.0" />
+										<Font name="Cantarell" size="18.0" />
+									</font>
+									<GridPane.margin>
+										<Insets right="10.0" />
+									</GridPane.margin>
+								</Label>
+								<JFXTextField fx:id="search" maxWidth="250.0"
+									onKeyReleased="#searchFilterChanged" GridPane.columnIndex="1">
+									<font>
+										<Font name="Segoe UI" size="16.0" />
+										<Font name="Cantarell" size="16.0" />
+									</font>
+								</JFXTextField>
+								<HBox GridPane.columnIndex="2" GridPane.rowIndex="1"
+									GridPane.columnSpan="2" spacing="10" alignment="CENTER_LEFT">
+									<children>
+										<JFXCheckBox text="Release" fx:id="chkRelease"
+											checkedColor="#8CAF62" selected="true" onAction="#chkTypeChanged">
+											<font>
+												<Font name="Segoe UI" size="18.0" />
+												<Font name="Cantarell" size="18.0" />
+											</font>
+										</JFXCheckBox>
+										<JFXCheckBox text="Beta" fx:id="chkBeta"
+											checkedColor="#7FA5C4" selected="true" onAction="#chkTypeChanged">
+											<font>
+												<Font name="Segoe UI" size="18.0" />
+												<Font name="Cantarell" size="18.0" />
+											</font>
+										</JFXCheckBox>
+										<JFXCheckBox text="Alpha" fx:id="chkAlpha"
+											checkedColor="#E49788" selected="true" onAction="#chkTypeChanged">
+											<font>
+												<Font name="Segoe UI" size="18.0" />
+												<Font name="Cantarell" size="18.0" />
+											</font>
+										</JFXCheckBox>
+									</children>
+								</HBox>
+							</children>
+						</GridPane>
+					</children>
+					<padding>
+						<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+					</padding>
+				</AnchorPane>
+			</content>
+			<font>
+				<Font size="24.0" />
+			</font>
+		</TitledPane>
+		<ScrollPane prefHeight="750.0"
+			style="-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;">
+			<content>
+				<VBox fx:id="spContent" prefWidth="1047.0" />
+			</content>
+		</ScrollPane>
+	</children>
+</VBox>

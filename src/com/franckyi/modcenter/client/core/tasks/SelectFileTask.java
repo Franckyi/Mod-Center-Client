@@ -13,7 +13,7 @@ import com.franckyi.modcenter.api.ModCenterAPI;
 import com.franckyi.modcenter.api.Project;
 import com.franckyi.modcenter.api.ProjectFile;
 import com.franckyi.modcenter.client.ModCenterClient;
-import com.franckyi.modcenter.client.controller.MainWindowController;
+import com.franckyi.modcenter.client.controller.ModBrowserController;
 import com.franckyi.modcenter.client.controller.SelectFileController;
 import com.franckyi.modcenter.client.core.data.DataFiles;
 import com.franckyi.modcenter.client.core.data.cache.ProjectDownloadCache;
@@ -53,10 +53,8 @@ public class SelectFileTask extends Task<Void> {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					((SelectFileController) ModCenterClient.INSTANCE.parents.get(file).getUserData())
-							.init(project.getName(), files);
-					((MainWindowController) ModCenterClient.INSTANCE.parents.get(FXMLFile.MAIN).getUserData())
-							.createSelectView(project, file);
+					ModBrowserController.get().addTab(SelectFileController.get(file).init(files),
+							project.getName());
 				}
 			});
 		}

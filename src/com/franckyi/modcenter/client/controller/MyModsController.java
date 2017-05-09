@@ -12,10 +12,12 @@ import com.franckyi.modcenter.api.EnumCategory;
 import com.franckyi.modcenter.api.EnumSortFilter;
 import com.franckyi.modcenter.client.MCCConfig;
 import com.franckyi.modcenter.client.MCCConfig.EnumConfig;
+import com.franckyi.modcenter.client.ModCenterClient;
 import com.franckyi.modcenter.client.core.data.DataFiles;
 import com.franckyi.modcenter.client.core.json.JsonModcache;
 import com.franckyi.modcenter.client.core.json.JsonProject;
 import com.franckyi.modcenter.client.core.json.MCCJson;
+import com.franckyi.modcenter.client.view.fxml.FXMLFile;
 import com.franckyi.modcenter.client.view.region.ProjectVisual;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -215,6 +217,10 @@ public class MyModsController implements Initializable {
 			first.setDisable(true);
 			previous.setDisable(true);
 		}
+	}
+
+	public static MyModsController get() {
+		return (MyModsController) ModCenterClient.INSTANCE.parents.get(FXMLFile.MY_MODS).getUserData();
 	}
 
 	public class ProjectComparator implements Comparator<JsonProject> {

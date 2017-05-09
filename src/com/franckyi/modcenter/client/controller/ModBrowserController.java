@@ -7,7 +7,9 @@ import java.util.ResourceBundle;
 import com.franckyi.modcenter.api.EnumCategory;
 import com.franckyi.modcenter.api.EnumSortFilter;
 import com.franckyi.modcenter.api.ModCenterAPI;
+import com.franckyi.modcenter.client.ModCenterClient;
 import com.franckyi.modcenter.client.core.tasks.ModBrowserListTask;
+import com.franckyi.modcenter.client.view.fxml.FXMLFile;
 import com.franckyi.modcenter.client.view.region.LoadingPane;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -17,8 +19,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -65,6 +70,9 @@ public class ModBrowserController implements Initializable {
 
 	@FXML
 	private JFXButton first, previous, next, last;
+
+	@FXML
+	private TabPane tabPane;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -209,6 +217,18 @@ public class ModBrowserController implements Initializable {
 			first.setDisable(true);
 			previous.setDisable(true);
 		}
+	}
+
+	public void addTab(Parent root, String name) {
+		Tab tab = new Tab();
+		tab.setContent(root);
+		tab.setText(name);
+		tabPane.getTabs().add(tab);
+		tabPane.getSelectionModel().select(tab);
+	}
+
+	public static ModBrowserController get() {
+		return (ModBrowserController) ModCenterClient.INSTANCE.parents.get(FXMLFile.MOD_BROWSER).getUserData();
 	}
 
 }

@@ -75,8 +75,11 @@ public class SettingsController implements Initializable {
 		MCCConfig.setProperty(EnumConfig.projectsPerPage, projectsPerPage.getText());
 		// For each parameter
 		MCCConfig.saveConfig();
-		((ModBrowserController) ModCenterClient.INSTANCE.parents.get(FXMLFile.MOD_BROWSER).getUserData())
-				.updateModBrowser();
+		ModBrowserController.get().updateModBrowser();
+	}
+
+	public static SettingsController get() {
+		return (SettingsController) ModCenterClient.INSTANCE.parents.get(FXMLFile.SETTINGS).getUserData();
 	}
 
 }
