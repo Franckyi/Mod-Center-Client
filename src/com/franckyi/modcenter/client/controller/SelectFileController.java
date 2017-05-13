@@ -1,113 +1,104 @@
 package com.franckyi.modcenter.client.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.franckyi.modcenter.api.ModCenterAPI;
+import com.franckyi.modcenter.api.beans.Project;
 import com.franckyi.modcenter.api.beans.ProjectFile;
-import com.franckyi.modcenter.api.beans.enums.EnumCategory;
-import com.franckyi.modcenter.api.beans.enums.EnumSortFilter;
+import com.franckyi.modcenter.api.beans.ProjectFileFilter;
+import com.franckyi.modcenter.api.beans.enums.EnumFileType;
 import com.franckyi.modcenter.client.ModCenterClient;
+import com.franckyi.modcenter.client.core.tasks.SelectFileTask;
 import com.franckyi.modcenter.client.view.MCCColors;
 import com.franckyi.modcenter.client.view.fxml.FXMLFile;
 import com.franckyi.modcenter.client.view.region.FileVisual;
+import com.franckyi.modcenter.client.view.region.LoadingPane;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class SelectFileController {
-	
+
 	public String currentMcVersion;
-	public EnumSortFilter currentSortFilter;
-	public boolean currentSortOrder = false;
-	public String currentSearchText;
-	
 	public boolean searching;
+
+	private Project project;
+	private boolean latest;
 
 	@FXML
 	private VBox root;
-	
-	@FXML
-	private JFXComboBox<EnumSortFilter> sortFilter;
-
-	@FXML
-	private ImageView sortOrder;
 
 	@FXML
 	private JFXComboBox<String> mcVersion;
 
-	@FXML
-	public JFXTextField search;
-
-	@FXML
-	public JFXComboBox<EnumCategory> categories;
-	
 	@FXML
 	public JFXCheckBox chkRelease, chkBeta, chkAlpha;
 
 	@FXML
 	private VBox spContent;
 
-	public VBox init(List<ProjectFile> files) {
+	public VBox init(Project project, List<ProjectFile> files, boolean latest, ProjectFileFilter filter) {
+		this.project = project;
+		this.latest = latest;
+		mcVersion.getItems().add("");
+		try {
+			mcVersion.getItems().addAll(ModCenterAPI.getVersions(project));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		mcVersion.setValue(filter.getVersion());
+		currentMcVersion = filter.getVersion();
+		spContent.getChildren().clear();
 		for (ProjectFile file : files)
 			spContent.getChildren().addAll(new Separator(), new FileVisual(file));
 		if (!spContent.getChildren().isEmpty())
 			spContent.getChildren().remove(0);
+		else
+			spContent.getChildren().add(new Label("No files found."));
 		chkRelease.setTextFill(MCCColors.GREEN);
+		chkRelease.setSelected(filter.getTypes().contains(EnumFileType.RELEASE));
 		chkBeta.setTextFill(MCCColors.BLUE);
+		chkBeta.setSelected(filter.getTypes().contains(EnumFileType.BETA));
 		chkAlpha.setTextFill(MCCColors.RED);
+		chkAlpha.setSelected(filter.getTypes().contains(EnumFileType.ALPHA));
 		return root;
 	}
-	
+
 	@FXML
 	void mcVersionChanged(ActionEvent event) {
 		if (!mcVersion.getValue().equals(currentMcVersion)) {
 			currentMcVersion = mcVersion.getValue();
-			//
+			searching = true;
+			updateFileList();
 		}
 	}
 
-	@FXML
-	void sortFilterChanged(ActionEvent event) {
-		if (!sortFilter.getValue().equals(currentSortFilter)) {
-			currentSortFilter = sortFilter.getValue();
-			//
-		}
-	}
-
-	@FXML
-	void sortOrderChanged(MouseEvent event) {
-		if (!searching) {
-			if (currentSortOrder) {
-				currentSortOrder = false;
-				sortOrder.setImage(new Image(getClass().getResourceAsStream("../view/img/arrow-down.png")));
-			} else {
-				currentSortOrder = true;
-				sortOrder.setImage(new Image(getClass().getResourceAsStream("../view/img/arrow-up.png")));
-			}
-			//
-		}
-	}
-
-	@FXML
-	void searchFilterChanged(KeyEvent event) {
-		if (event.getCode().equals(KeyCode.ENTER)) {
-			currentSearchText = search.getText();
-			//
-		}
-	}
-	
 	@FXML
 	void chkTypeChanged(ActionEvent event) {
-		
+		updateFileList();
+	}
+
+	private void updateFileList() {
+		List<EnumFileType> types = new ArrayList<>();
+		if (chkRelease.isSelected())
+			types.add(EnumFileType.RELEASE);
+		if (chkBeta.isSelected())
+			types.add(EnumFileType.BETA);
+		if (chkAlpha.isSelected())
+			types.add(EnumFileType.ALPHA);
+		ProjectFileFilter filter = new ProjectFileFilter(currentMcVersion, types);
+		spContent.getChildren().clear();
+		spContent.getChildren().add(new LoadingPane());
+		Thread th = new Thread(new SelectFileTask(project, filter, latest));
+		th.setName("SelectFileTask");
+		th.start();
 	}
 
 	public static SelectFileController get(FXMLFile file) {

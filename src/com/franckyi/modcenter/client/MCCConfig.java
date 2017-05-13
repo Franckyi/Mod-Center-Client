@@ -72,7 +72,8 @@ public class MCCConfig {
 
 	public enum EnumConfig {
 
-		displayModsThumbnail(true), projectsPerPage(20);
+		displayModsThumbnail(true),
+		projectsPerPage(20);
 
 		public String key;
 		public Object value;

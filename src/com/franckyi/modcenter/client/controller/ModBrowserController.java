@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.franckyi.modcenter.api.ModCenterAPI;
+import com.franckyi.modcenter.api.beans.Project;
 import com.franckyi.modcenter.api.beans.enums.EnumCategory;
 import com.franckyi.modcenter.api.beans.enums.EnumSortFilter;
 import com.franckyi.modcenter.client.ModCenterClient;
@@ -72,7 +73,7 @@ public class ModBrowserController implements Initializable {
 	private JFXButton first, previous, next, last;
 
 	@FXML
-	private TabPane tabPane;
+	public TabPane tabPane;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -219,10 +220,17 @@ public class ModBrowserController implements Initializable {
 		}
 	}
 
-	public void addTab(Parent root, String name) {
+	public void addTab(Parent root, Project project) {
+		for (Tab tab : tabPane.getTabs())
+			if (tab.getUserData() != null && tab.getUserData().equals(project.getProjectId())) {
+				tab.setContent(root);
+				tabPane.getSelectionModel().select(tab);
+				return;
+			}
 		Tab tab = new Tab();
 		tab.setContent(root);
-		tab.setText(name);
+		tab.setText(project.getName());
+		tab.setUserData(project.getProjectId());
 		tabPane.getTabs().add(tab);
 		tabPane.getSelectionModel().select(tab);
 	}

@@ -8,21 +8,26 @@ import com.franckyi.modcenter.client.view.MCCColors;
 import com.franckyi.modcenter.client.view.MCCFonts;
 import com.franckyi.modcenter.client.view.nodes.DownloadButton;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public class FileVisual extends Pane {
+public class FileCompactVisual extends Pane {
 
 	private Color color;
 	private Label name, size, date, type, mcVersion, dlCount;
 	private DownloadButton download;
 
-	public FileVisual(ProjectFile file) {
-		this.setWidth(1030);
-		this.setHeight(100);
+	public FileCompactVisual(ProjectFile file) {
+		this.setWidth(1047);
+		this.setHeight(349);
 		color = MCCColors.getColor(file.getType());
+		this.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
 		name = new Label(file.getFileName());
 		size = new Label(file.getSize());
 		date = new Label("Uploaded " + file.getUploaded().toLocalDate().toString());

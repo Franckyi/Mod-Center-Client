@@ -64,8 +64,8 @@ public class DownloadButton extends HBox {
 				public void run() {
 					try {
 						SelectFileTask.startDownload(file);
-					} catch (Exception ex) {
-						ex.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
 				}
 			}.start();
