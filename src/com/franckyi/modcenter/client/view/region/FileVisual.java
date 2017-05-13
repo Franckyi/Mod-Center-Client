@@ -3,7 +3,7 @@ package com.franckyi.modcenter.client.view.region;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import com.franckyi.modcenter.api.ProjectFile;
+import com.franckyi.modcenter.api.beans.ProjectFile;
 import com.franckyi.modcenter.client.view.MCCColors;
 import com.franckyi.modcenter.client.view.MCCFonts;
 import com.franckyi.modcenter.client.view.nodes.DownloadButton;

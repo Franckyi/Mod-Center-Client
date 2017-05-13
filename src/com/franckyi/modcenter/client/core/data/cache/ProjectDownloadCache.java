@@ -5,8 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.franckyi.modcenter.api.Project;
-import com.franckyi.modcenter.api.ProjectFile;
+import com.franckyi.modcenter.api.beans.Project;
+import com.franckyi.modcenter.api.beans.ProjectFile;
 import com.franckyi.modcenter.client.ModCenterClient;
 import com.franckyi.modcenter.client.core.data.DataFiles;
 import com.franckyi.modcenter.client.core.json.JsonModcache;

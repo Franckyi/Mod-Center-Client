@@ -8,8 +8,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.franckyi.modcenter.api.EnumCategory;
-import com.franckyi.modcenter.api.EnumSortFilter;
+import com.franckyi.modcenter.api.beans.enums.EnumCategory;
+import com.franckyi.modcenter.api.beans.enums.EnumSortFilter;
 import com.franckyi.modcenter.client.MCCConfig;
 import com.franckyi.modcenter.client.MCCConfig.EnumConfig;
 import com.franckyi.modcenter.client.ModCenterClient;

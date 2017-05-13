@@ -1,6 +1,6 @@
 package com.franckyi.modcenter.client.core.json;
 
-import com.franckyi.modcenter.api.ProjectFile;
+import com.franckyi.modcenter.api.beans.ProjectFile;
 
 @SuppressWarnings("unused")
 public class JsonProjectFile {

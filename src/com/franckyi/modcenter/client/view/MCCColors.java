@@ -1,6 +1,6 @@
 package com.franckyi.modcenter.client.view;
 
-import com.franckyi.modcenter.api.EnumFileType;
+import com.franckyi.modcenter.api.beans.enums.EnumFileType;
 
 import javafx.scene.paint.Color;
 

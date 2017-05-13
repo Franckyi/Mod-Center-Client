@@ -3,8 +3,8 @@ package com.franckyi.modcenter.client.core.tasks;
 import java.util.List;
 
 import com.franckyi.modcenter.api.ModCenterAPI;
-import com.franckyi.modcenter.api.Project;
-import com.franckyi.modcenter.api.SortedProjectFilter;
+import com.franckyi.modcenter.api.beans.Project;
+import com.franckyi.modcenter.api.beans.SortedProjectFilter;
 import com.franckyi.modcenter.client.MCCConfig;
 import com.franckyi.modcenter.client.MCCConfig.EnumConfig;
 import com.franckyi.modcenter.client.ModCenterClient;

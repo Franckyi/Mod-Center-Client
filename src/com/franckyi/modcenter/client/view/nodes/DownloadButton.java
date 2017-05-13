@@ -1,7 +1,7 @@
 package com.franckyi.modcenter.client.view.nodes;
 
-import com.franckyi.modcenter.api.Project;
-import com.franckyi.modcenter.api.ProjectFile;
+import com.franckyi.modcenter.api.beans.Project;
+import com.franckyi.modcenter.api.beans.ProjectFile;
 import com.franckyi.modcenter.client.ModCenterClient;
 import com.franckyi.modcenter.client.core.tasks.SelectFileTask;
 import com.franckyi.modcenter.client.view.MCCFonts;

@@ -5,13 +5,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import org.jsoup.Connection.Response;
-import org.jsoup.Jsoup;
-
-import com.franckyi.modcenter.api.CurseURLFormatter;
 import com.franckyi.modcenter.api.ModCenterAPI;
-import com.franckyi.modcenter.api.Project;
-import com.franckyi.modcenter.api.ProjectFile;
+import com.franckyi.modcenter.api.beans.Project;
+import com.franckyi.modcenter.api.beans.ProjectFile;
+import com.franckyi.modcenter.api.misc.CurseParser;
 import com.franckyi.modcenter.client.ModCenterClient;
 import com.franckyi.modcenter.client.controller.ModBrowserController;
 import com.franckyi.modcenter.client.controller.SelectFileController;
@@ -61,12 +58,6 @@ public class SelectFileTask extends Task<Void> {
 		return null;
 	}
 
-	private static String getUrl(ProjectFile file) throws IOException {
-		Response response = Jsoup.connect(CurseURLFormatter.format(file.getFileUrl())).ignoreContentType(true)
-				.execute();
-		return (response.url().toString());
-	}
-
 	public static void startDownload(ProjectFile file) throws IOException {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -76,7 +67,7 @@ public class SelectFileTask extends Task<Void> {
 				ModCenterClient.INSTANCE.secondaryStage.show();
 			}
 		});
-		String dlUrl = getUrl(file);
+		String dlUrl = CurseParser.getFinalUrl(file);
 		String dlFileName = dlUrl.split("/")[dlUrl.split("/").length - 1];
 		DownloadModTask task = new DownloadModTask(new URL(dlUrl),
 				new File(DataFiles.MOD_CACHE_FOLDER.getPath() + "/" + dlFileName));

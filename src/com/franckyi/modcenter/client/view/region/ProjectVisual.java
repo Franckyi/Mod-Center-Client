@@ -3,7 +3,7 @@ package com.franckyi.modcenter.client.view.region;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import com.franckyi.modcenter.api.Project;
+import com.franckyi.modcenter.api.beans.Project;
 import com.franckyi.modcenter.client.MCCConfig;
 import com.franckyi.modcenter.client.MCCConfig.EnumConfig;
 import com.franckyi.modcenter.client.MCCUtils;

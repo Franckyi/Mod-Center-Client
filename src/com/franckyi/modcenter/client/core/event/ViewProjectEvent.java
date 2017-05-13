@@ -6,7 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import com.franckyi.modcenter.api.CurseURLFormatter;
+import com.franckyi.modcenter.api.misc.CurseURLFormatter;
 import com.franckyi.modcenter.client.ModCenterClient;
 
 import javafx.event.ActionEvent;

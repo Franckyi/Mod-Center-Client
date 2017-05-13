@@ -3,7 +3,7 @@ package com.franckyi.modcenter.client.view.fxml;
 import java.util.Arrays;
 import java.util.List;
 
-import com.franckyi.modcenter.api.Project;
+import com.franckyi.modcenter.api.beans.Project;
 
 public class FXMLFile {
 

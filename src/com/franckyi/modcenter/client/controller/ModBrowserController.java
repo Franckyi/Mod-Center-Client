@@ -4,9 +4,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import com.franckyi.modcenter.api.EnumCategory;
-import com.franckyi.modcenter.api.EnumSortFilter;
 import com.franckyi.modcenter.api.ModCenterAPI;
+import com.franckyi.modcenter.api.beans.enums.EnumCategory;
+import com.franckyi.modcenter.api.beans.enums.EnumSortFilter;
 import com.franckyi.modcenter.client.ModCenterClient;
 import com.franckyi.modcenter.client.core.tasks.ModBrowserListTask;
 import com.franckyi.modcenter.client.view.fxml.FXMLFile;

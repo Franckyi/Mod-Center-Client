@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.franckyi.modcenter.api.EnumCategory;
-import com.franckyi.modcenter.api.Project;
+import com.franckyi.modcenter.api.beans.Project;
+import com.franckyi.modcenter.api.beans.enums.EnumCategory;
 
 public class JsonProject {
 

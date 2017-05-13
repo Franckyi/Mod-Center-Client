@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import com.franckyi.modcenter.api.EnumCategory;
+import com.franckyi.modcenter.api.beans.enums.EnumCategory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;

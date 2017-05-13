@@ -2,9 +2,9 @@ package com.franckyi.modcenter.client.controller;
 
 import java.util.List;
 
-import com.franckyi.modcenter.api.EnumCategory;
-import com.franckyi.modcenter.api.EnumSortFilter;
-import com.franckyi.modcenter.api.ProjectFile;
+import com.franckyi.modcenter.api.beans.ProjectFile;
+import com.franckyi.modcenter.api.beans.enums.EnumCategory;
+import com.franckyi.modcenter.api.beans.enums.EnumSortFilter;
 import com.franckyi.modcenter.client.ModCenterClient;
 import com.franckyi.modcenter.client.view.MCCColors;
 import com.franckyi.modcenter.client.view.fxml.FXMLFile;
