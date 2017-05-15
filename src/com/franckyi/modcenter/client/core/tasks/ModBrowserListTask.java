@@ -30,6 +30,7 @@ public class ModBrowserListTask extends Task<Pane> {
 
 	@Override
 	protected Pane call() throws Exception {
+		Thread.currentThread().setName(getClass().getSimpleName());
 		VBox vbox = new VBox();
 		try {
 			controller.maxPage = ModCenterAPI.getProjectsPageNumber(MCCConfig.getInteger(EnumConfig.projectsPerPage),

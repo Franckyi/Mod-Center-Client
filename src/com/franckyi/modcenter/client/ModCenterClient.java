@@ -21,7 +21,7 @@ public class ModCenterClient extends Application {
 
 	public static ModCenterClient INSTANCE;
 	public MCCConfig config;
-	public Stage mainStage, secondaryStage = new Stage();
+	public Stage mainStage;
 	public Map<FXMLFile, Parent> parents = new HashMap<>();
 
 	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
@@ -32,8 +32,6 @@ public class ModCenterClient extends Application {
 		loadFXML(FXMLFile.MOD_BROWSER);
 		loadFXML(FXMLFile.SETTINGS);
 		loadFXML(FXMLFile.MAIN);
-		secondaryStage.setResizable(false);
-		secondaryStage.setAlwaysOnTop(true);
 		mainStage = primaryStage;
 		mainStage.setScene(new Scene(parents.get(FXMLFile.MAIN)));
 		mainStage.setResizable(false);

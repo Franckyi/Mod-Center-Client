@@ -9,53 +9,63 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.franckyi.modcenter.client.controller.SelectFileController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+	prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="com.franckyi.modcenter.client.controller.SelectFileController">
 	<children>
 		<TitledPane expanded="false" text="Filters" VBox.vgrow="ALWAYS">
 			<font>
 				<Font size="24.0" />
 			</font>
-         <content>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="500.0" spacing="10.0">
-                     <children>
-            								<Label prefHeight="32.0" text="MC Version :">
-            									<font>
-            										<Font name="Segoe UI" size="18.0" />
-            										<Font name="Cantarell" size="18.0" />
-            									</font>
-            								</Label>
-            								<JFXComboBox fx:id="mcVersion" focusColor="#40a84b" onAction="#mcVersionChanged" prefWidth="250.0" />
-                     </children>
-                  </HBox>
-            								<HBox alignment="CENTER" prefHeight="50.0" prefWidth="500.0" spacing="10">
-            									<children>
-            										<JFXCheckBox fx:id="chkRelease" checkedColor="#8CAF62" onAction="#chkTypeChanged" selected="true" text="Release">
-            											<font>
-            												<Font name="Segoe UI" size="18.0" />
-            												<Font name="Cantarell" size="18.0" />
-            											</font>
-            										</JFXCheckBox>
-            										<JFXCheckBox fx:id="chkBeta" checkedColor="#7FA5C4" onAction="#chkTypeChanged" selected="true" text="Beta">
-            											<font>
-            												<Font name="Segoe UI" size="18.0" />
-            												<Font name="Cantarell" size="18.0" />
-            											</font>
-            										</JFXCheckBox>
-            										<JFXCheckBox fx:id="chkAlpha" checkedColor="#E49788" onAction="#chkTypeChanged" selected="true" text="Alpha">
-            											<font>
-            												<Font name="Segoe UI" size="18.0" />
-            												<Font name="Cantarell" size="18.0" />
-            											</font>
-            										</JFXCheckBox>
-            									</children>
-            								</HBox>
-               </children>
-            </HBox>
-         </content>
+			<content>
+				<HBox prefHeight="100.0" prefWidth="200.0">
+					<children>
+						<HBox alignment="CENTER" prefHeight="100.0" prefWidth="500.0"
+							spacing="10.0">
+							<children>
+								<Label prefHeight="32.0" text="MC Version :">
+									<font>
+										<Font name="Segoe UI" size="18.0" />
+										<Font name="Cantarell" size="18.0" />
+									</font>
+								</Label>
+								<JFXComboBox fx:id="mcVersion" focusColor="#40a84b"
+									onAction="#mcVersionChanged" prefWidth="250.0" />
+							</children>
+						</HBox>
+						<HBox alignment="CENTER" prefHeight="50.0" prefWidth="500.0"
+							spacing="10">
+							<children>
+								<JFXCheckBox fx:id="chkRelease" checkedColor="#8CAF62"
+									onAction="#chkTypeChanged" selected="true" text="Release">
+									<font>
+										<Font name="Segoe UI" size="18.0" />
+										<Font name="Cantarell" size="18.0" />
+									</font>
+								</JFXCheckBox>
+								<JFXCheckBox fx:id="chkBeta" checkedColor="#7FA5C4"
+									onAction="#chkTypeChanged" selected="true" text="Beta">
+									<font>
+										<Font name="Segoe UI" size="18.0" />
+										<Font name="Cantarell" size="18.0" />
+									</font>
+								</JFXCheckBox>
+								<JFXCheckBox fx:id="chkAlpha" checkedColor="#E49788"
+									onAction="#chkTypeChanged" selected="true" text="Alpha">
+									<font>
+										<Font name="Segoe UI" size="18.0" />
+										<Font name="Cantarell" size="18.0" />
+									</font>
+								</JFXCheckBox>
+							</children>
+						</HBox>
+					</children>
+				</HBox>
+			</content>
 		</TitledPane>
-		<ScrollPane prefHeight="753.0" prefWidth="1050.0" style="-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;">
+		<ScrollPane prefHeight="753.0" prefWidth="1050.0"
+			style="-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; -fx-background-insets: 0, 1, 2; -fx-background-radius: 5, 4, 3;">
 			<content>
 				<VBox fx:id="spContent" prefWidth="1030.0" />
 			</content>

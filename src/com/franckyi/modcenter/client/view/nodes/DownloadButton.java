@@ -2,14 +2,13 @@ package com.franckyi.modcenter.client.view.nodes;
 
 import com.franckyi.modcenter.api.beans.Project;
 import com.franckyi.modcenter.api.beans.ProjectFile;
-import com.franckyi.modcenter.client.ModCenterClient;
+import com.franckyi.modcenter.client.core.tasks.DownloadModTask;
 import com.franckyi.modcenter.client.core.tasks.SelectFileTask;
+import com.franckyi.modcenter.client.view.MCCColors;
 import com.franckyi.modcenter.client.view.MCCFonts;
-import com.franckyi.modcenter.client.view.region.LoadingPane;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -30,9 +29,7 @@ public class DownloadButton extends HBox {
 				new BackgroundFill(Color.web("#8CAF62"), new CornerRadii(10, 0, 0, 10, false), Insets.EMPTY)));
 		download.setPrefSize(150, 50);
 		download.setOnAction(e -> {
-			Thread task = new Thread(new SelectFileTask(project, version, true));
-			task.setName("SelectModTask");
-			task.start();
+			new Thread(new SelectFileTask(project, version, true)).start();
 		});
 
 		options = new JFXButton("...");
@@ -43,32 +40,20 @@ public class DownloadButton extends HBox {
 				new BackgroundFill(Color.web("#8CAF62"), new CornerRadii(0, 10, 10, 0, false), Insets.EMPTY)));
 		options.setPrefSize(60, 50);
 		options.setOnAction(e -> {
-			Thread task = new Thread(new SelectFileTask(project, version, false));
-			task.setName("SelectModTask");
-			task.start();
+			new Thread(new SelectFileTask(project, version, false)).start();
 		});
 		this.getChildren().addAll(download, options);
 	}
 
-	public DownloadButton(ProjectFile file, Color color) {
+	public DownloadButton(ProjectFile file) {
 		download = new JFXButton("Download");
 		download.setFont(MCCFonts.BIG_20);
 		download.setTextFill(Color.WHITE);
 		download.setStyle("-fx-border-color: rgba(0,0,0,0.25); -fx-border-radius: 10;");
-		download.setBackground(new Background(new BackgroundFill(color, new CornerRadii(10), Insets.EMPTY)));
+		download.setBackground(new Background(new BackgroundFill(MCCColors.getColor(file.getType()), new CornerRadii(10), Insets.EMPTY)));
 		download.setPrefSize(175, 25);
 		download.setOnAction(e -> {
-			ModCenterClient.INSTANCE.secondaryStage.setScene(new Scene(new LoadingPane()));
-			new Thread() {
-				@Override
-				public void run() {
-					try {
-						SelectFileTask.startDownload(file);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}.start();
+			new Thread(new DownloadModTask(file)).start();
 		});
 		this.getChildren().add(download);
 	}

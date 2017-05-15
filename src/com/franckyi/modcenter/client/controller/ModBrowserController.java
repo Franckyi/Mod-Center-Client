@@ -2,15 +2,18 @@ package com.franckyi.modcenter.client.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.franckyi.modcenter.api.ModCenterAPI;
 import com.franckyi.modcenter.api.beans.Project;
+import com.franckyi.modcenter.api.beans.ProjectFile;
 import com.franckyi.modcenter.api.beans.enums.EnumCategory;
 import com.franckyi.modcenter.api.beans.enums.EnumSortFilter;
 import com.franckyi.modcenter.client.ModCenterClient;
 import com.franckyi.modcenter.client.core.tasks.ModBrowserListTask;
 import com.franckyi.modcenter.client.view.fxml.FXMLFile;
+import com.franckyi.modcenter.client.view.region.FileVisual;
 import com.franckyi.modcenter.client.view.region.LoadingPane;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -23,6 +26,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -33,6 +37,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class ModBrowserController implements Initializable {
@@ -191,9 +196,7 @@ public class ModBrowserController implements Initializable {
 		lock(true);
 		modBrowserScrollPane.setContent(new LoadingPane());
 		pageNumber.setText("Page n°" + page);
-		Thread nextTask = new Thread(new ModBrowserListTask(this));
-		nextTask.setName("ModBrowserListTask");
-		nextTask.start();
+		new Thread(new ModBrowserListTask(this)).start();
 	}
 
 	public void lock(boolean b) {
@@ -221,12 +224,6 @@ public class ModBrowserController implements Initializable {
 	}
 
 	public void addTab(Parent root, Project project) {
-		for (Tab tab : tabPane.getTabs())
-			if (tab.getUserData() != null && tab.getUserData().equals(project.getProjectId())) {
-				tab.setContent(root);
-				tabPane.getSelectionModel().select(tab);
-				return;
-			}
 		Tab tab = new Tab();
 		tab.setContent(root);
 		tab.setText(project.getName());
@@ -234,9 +231,28 @@ public class ModBrowserController implements Initializable {
 		tabPane.getTabs().add(tab);
 		tabPane.getSelectionModel().select(tab);
 	}
+	
+	public void replaceTab(Tab tab, List<ProjectFile> files) {
+		VBox spContent = null;
+		try {
+			spContent = (VBox) ((ScrollPane) ((VBox) tab.getContent()).getChildren().get(1)).getContent();
+			spContent.getChildren().clear();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		for(ProjectFile file : files)
+			spContent.getChildren().addAll(new Separator(), new FileVisual(file));
+		if (!spContent.getChildren().isEmpty())
+			spContent.getChildren().remove(0);
+		else
+			spContent.getChildren().add(new Label("No files found."));
+		tabPane.getSelectionModel().select(tab);
+	}
 
 	public static ModBrowserController get() {
 		return (ModBrowserController) ModCenterClient.INSTANCE.parents.get(FXMLFile.MOD_BROWSER).getUserData();
 	}
+
+
 
 }

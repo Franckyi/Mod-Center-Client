@@ -1,8 +1,6 @@
 package com.franckyi.modcenter.client.core.tasks;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,18 +11,14 @@ import com.franckyi.modcenter.api.beans.Project;
 import com.franckyi.modcenter.api.beans.ProjectFile;
 import com.franckyi.modcenter.api.beans.ProjectFileFilter;
 import com.franckyi.modcenter.api.beans.enums.EnumFileType;
-import com.franckyi.modcenter.api.misc.CurseParser;
 import com.franckyi.modcenter.client.ModCenterClient;
 import com.franckyi.modcenter.client.controller.ModBrowserController;
 import com.franckyi.modcenter.client.controller.SelectFileController;
-import com.franckyi.modcenter.client.core.data.DataFiles;
-import com.franckyi.modcenter.client.core.data.cache.ProjectDownloadCache;
 import com.franckyi.modcenter.client.view.fxml.FXMLFile;
-import com.franckyi.modcenter.client.view.region.LoadingPane;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.scene.Scene;
+import javafx.scene.control.Tab;
 
 public class SelectFileTask extends Task<Void> {
 
@@ -51,18 +45,9 @@ public class SelectFileTask extends Task<Void> {
 
 	@Override
 	protected Void call() throws Exception {
-		ModCenterClient.print("Selecting mod file for project " + project.getProjectUrl() + " (auto=" + latest + ")");
+		Thread.currentThread().setName(getClass().getSimpleName());
+		ModCenterClient.print("Selecting files for project '" + project.getName() + "'");
 		List<ProjectFile> allFiles = ModCenterAPI.getFilesFromProject(project, filter);
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					ModCenterClient.INSTANCE.loadFXML(file);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		});
 		List<ProjectFile> files = new ArrayList<>();
 		if (latest) {
 			List<EnumFileType> types = new ArrayList<>();
@@ -75,19 +60,37 @@ public class SelectFileTask extends Task<Void> {
 				return null;
 		} else
 			files.addAll(allFiles);
+		for (Tab tab : ModBrowserController.get().tabPane.getTabs())
+			if (tab.getUserData() != null && tab.getUserData().equals(project.getProjectId())) {
+				ModCenterClient.print("Updating...");
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						ModBrowserController.get().replaceTab(tab, files);
+					}
+				});
+				return null;
+			}
+		ModCenterClient.print("Showing...");
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
+				try {
+					ModCenterClient.INSTANCE.loadFXML(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				ModBrowserController.get().addTab(SelectFileController.get(file).init(project, files, latest, filter),
 						project);
 			}
 		});
+
 		return null;
 	}
 
 	private boolean check(List<ProjectFile> files, List<EnumFileType> types) throws IOException, SQLException {
 		if (files.size() == 1) {
-			startDownload(files.get(0));
+			new Thread(new DownloadModTask(files.get(0))).start();
 			return true;
 		}
 		List<ProjectFile> files2 = new ArrayList<>(files);
@@ -98,49 +101,10 @@ public class SelectFileTask extends Task<Void> {
 			}
 		});
 		if (files.get(0) == files.get(1)) {
-			startDownload(files.get(0));
+			new Thread(new DownloadModTask(files.get(0))).start();
 			return true;
 		}
 		return false;
-	}
-
-	public static void startDownload(ProjectFile file) throws IOException, SQLException {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				ModBrowserController.get().tabPane.setDisable(true);
-				ModCenterClient.INSTANCE.secondaryStage.setScene(new Scene(new LoadingPane()));
-				ModCenterClient.INSTANCE.secondaryStage.setTitle("Downloading");
-				ModCenterClient.INSTANCE.secondaryStage.show();
-			}
-		});
-		String dlUrl = CurseParser.getFinalUrl(file);
-		Project project = ModCenterAPI.getProjectFromFile(file);
-		String dlFileName = dlUrl.split("/")[dlUrl.split("/").length - 1];
-		DownloadModTask task = new DownloadModTask(new URL(dlUrl),
-				new File(DataFiles.MOD_CACHE_FOLDER.getPath() + "/" + dlFileName));
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				ModCenterClient.INSTANCE.secondaryStage.setScene(
-						new Scene(new LoadingPane("Downloading " + file.getFileName(), task.progressProperty())));
-			}
-		});
-		task.setOnSucceeded(event -> {
-			try {
-				ModCenterClient.print("Download ended : " + dlFileName + " - Now adding file to cache");
-				ProjectDownloadCache.addFileToCache(file, project);
-				ModCenterClient.INSTANCE.secondaryStage.hide();
-				ModBrowserController.get().tabPane.getTabs()
-						.remove(ModBrowserController.get().tabPane.getSelectionModel().getSelectedIndex());
-				ModBrowserController.get().tabPane.setDisable(false);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
-		Thread th = new Thread(task);
-		th.setName("DownloadModTask");
-		th.start();
 	}
 
 }

@@ -29,7 +29,7 @@ public class FileVisual extends Pane {
 		type = new Label(file.getType().getDisplayText());
 		mcVersion = new Label("for MC " + file.getVersion());
 		dlCount = new Label(NumberFormat.getNumberInstance(Locale.US).format(file.getDownloads()) + " downloads");
-		download = new DownloadButton(file, color);
+		download = new DownloadButton(file);
 		placeAndBuild();
 	}
 
